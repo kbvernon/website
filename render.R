@@ -105,18 +105,14 @@ tera$render(
 )
 
 # render cv --------------------------------------------------------------
-system2(
-  "typst",
-  args = c(
-    "compile",
-    "--root",
-    ".",
-    "--font-path",
-    "fonts/",
-    "_templates/cv.typ",
-    sprintf("pdfs/%s", config[["cv"]])
-  )
-)
+status <- system(sprintf(
+  "typst compile --root . --font-path fonts/ _templates/cv.typ pdfs/%s",
+  config[["cv"]]
+))
+
+if (status != 0) {
+  stop("typst compile failed with status ", status)
+}
 
 # clean up ---------------------------------------------------------------
 # remove json now that everything has compiled

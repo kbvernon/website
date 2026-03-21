@@ -14,7 +14,7 @@
 #let meta(body) = text(fill: muted, size: data-font-size, body)
 
 // ── Load Config ───────────────────────────────────────────────────────────────
-#let config = json("config.json")
+#let config = json("/config.json")
 
 // ── Page Setup ────────────────────────────────────────────────────────────────
 #let base-size = 10.5pt  // change this to scale everything
@@ -141,9 +141,9 @@
 }
 
 // ── Load Data ─────────────────────────────────────────────────────────────────
-#let articles      = json("data/article.json").items
-#let manuscripts   = json("data/manuscript.json").items
-#let presentations = json("data/presentation.json").items
+#let articles      = json("/data/article.json").items
+#let manuscripts   = json("/data/manuscript.json").items
+#let presentations = json("/data/presentation.json").items
 
 // ── Header ────────────────────────────────────────────────────────────────────
 
