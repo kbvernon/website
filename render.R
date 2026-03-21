@@ -105,10 +105,16 @@ tera$render(
 )
 
 # render cv --------------------------------------------------------------
-status <- system(sprintf(
-  "typst compile --root . --font-path fonts/ _templates/cv.typ pdfs/%s",
-  config[["cv"]]
-))
+status <- system2(
+  "typst",
+  args = c(
+    "compile",
+    "--root .",
+    "--font-path assets/",
+    "_templates/cv.typ",
+    sprintf("pdfs/%s", config[["cv"]])
+  )
+)
 
 if (status != 0) {
   stop("typst compile failed with status ", status)
