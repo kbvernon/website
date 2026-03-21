@@ -158,7 +158,6 @@
     columns: (1fr, auto),
     column-gutter: 1em,
     align(top)[
-      #set par(leading: 1.2em)
       Scientific Computing and Imaging Institute \
       University of Utah \
       72 So. Central Campus Drive Room 3750 \
