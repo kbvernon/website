@@ -105,10 +105,18 @@ tera$render(
 )
 
 # render cv --------------------------------------------------------------
-system(sprintf(
-  "typst compile --font-path fonts/ _templates/cv.typ pdfs/%s",
-  config[["cv"]]
-))
+system2(
+  "typst",
+  args = c(
+    "compile",
+    "--root",
+    ".",
+    "--font-path",
+    "fonts/",
+    "_templates/cv.typ",
+    sprintf("pdfs/%s", config[["cv"]])
+  )
+)
 
 # clean up ---------------------------------------------------------------
 # remove json now that everything has compiled

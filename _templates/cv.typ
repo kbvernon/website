@@ -13,6 +13,9 @@
 #let data-font-size = 0.9em
 #let meta(body) = text(fill: muted, size: data-font-size, body)
 
+// ── Load Config ───────────────────────────────────────────────────────────────
+#let config = json("config.json")
+
 // ── Page Setup ────────────────────────────────────────────────────────────────
 #let base-size = 10.5pt  // change this to scale everything
 #let date-fmt = "[month repr:long] [year]"
@@ -138,7 +141,6 @@
 }
 
 // ── Load Data ─────────────────────────────────────────────────────────────────
-#let config        = json("config.json")
 #let articles      = json("data/article.json").items
 #let manuscripts   = json("data/manuscript.json").items
 #let presentations = json("data/presentation.json").items
@@ -277,15 +279,17 @@
 #cv-section("Teaching")
 
 #plain-entry[
-  #text(fill: muted)[
-    Teaching interests: Behavioral Ecology, Urban Science, Environmental Data Science, Statistics,
-    Geography, Conservation & Sustainability, Human Prehistory, North American Prehistory.
+  *Teaching interests* \
+  #meta[
+    Behavioral Ecology, Urban Science, Environmental Data Science, Statistics,
+    Geography, Conservation & Sustainability, Human Prehistory, 
+    North American Prehistory.
   ]
 ]
 
 #plain-entry[
   *University of Utah* \
-  #text(fill: muted)[
+  #meta[
     ANTH 1010: Culture and the Human Experience \
     ANTH 1030: Introduction to World Prehistory \
     ANTH 5850: Quantitative Analysis of Archaeological Data
