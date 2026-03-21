@@ -1,0 +1,38 @@
+<div class="bib-download">
+    <a href="data/manuscript.bib" download><iconify-icon role="img" inline
+            icon="fa6-regular:floppy-disk"></iconify-icon>Download BibTeX</a>
+</div>
+<table class="bib-table">
+    <tbody>
+        {%- for ref in manuscripts %}
+        <tr>
+            <td class="year"></td>
+            <td class="data">
+                <div class="title">{{ ref.title }}</div>
+                <div class="details ref">
+                    {%- if ref["container-title"] %}
+                    <span>{{ ref["container-title"] }}</span>
+                    {%- endif -%}
+                    {%- if ref.status %} ({{ ref.status }}){%- endif %}
+                </div>
+                <div class="details authors">
+                    <iconify-icon role="img" inline icon="bi:people"></iconify-icon>
+                    {% for a in ref.author %}{{ a.given }} {{ a.family }}{% if not loop.last %}, {% endif %}{% endfor %}
+                </div>
+                <div class="link-group">
+                    {%- if ref.github %}
+                    <a href="{{ ref.github }}" class="btn btn-github">
+                        <iconify-icon role="img" inline icon="fa6-brands:github"></iconify-icon>GitHub
+                    </a>
+                    {%- endif %}
+                    {%- if ref.preprint %}
+                    <a href="{{ ref.preprint }}" class="btn btn-preprint">
+                        <iconify-icon role="img" inline icon="bi:filetype-pdf"></iconify-icon>Preprint
+                    </a>
+                    {%- endif %}
+                </div>
+            </td>
+        </tr>
+        {%- endfor %}
+    </tbody>
+</table>

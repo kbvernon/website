@@ -1,0 +1,292 @@
+@font-face {
+    font-family: "Noto Sans";
+    src: url("fonts/NotoSans-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("fonts/NotoSans-Italic.ttf");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("fonts/NotoSans-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("fonts/NotoSans-BoldItalic.ttf");
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Italic.ttf");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-BoldItalic.ttf");
+    font-weight: 700;
+    font-style: italic;
+}
+
+:root {
+    --font-sans: "Noto Sans", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+    --font-size-body: clamp(0.9rem, 0.9rem + 0.5vw, 1.1rem);
+    --font-size-h1: clamp(1.5rem, 1.2rem + 1.5vw, 2.3rem);
+    --color-muted: #555;
+    --color-border: #ccc;
+    --color-ink: black;
+    --bib-meta-gap: 0.3em;
+    --bib-data-font-size: 0.9em;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+}
+
+.page-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 95%;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+
+.content-container {
+    padding: 0 1rem;
+}
+
+/* navbar */
+nav {
+    font-family: var(--font-mono);
+}
+
+.name-full {
+    display: none;
+}
+
+nav h1 {
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-size-h1);
+}
+
+nav .content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul.icons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul.icons a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul.icons a:hover {
+    opacity: 0.5;
+}
+
+/* tabset */
+.tabset {
+    margin-top: 2.5em;
+}
+
+.tabset .labels {
+    display: none;
+    width: 100%;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+}
+
+.tabset select {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: inherit;
+    background: none;
+    border: 1px solid var(--color-border);
+    padding: 0.4em 0.5em;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.tabset .label {
+    background: none;
+    border: none;
+    padding: 0.5em 0.3em;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    text-align: left;
+    color: inherit;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    margin-right: 0.25em;
+}
+
+.tabset .label.active {
+    border-bottom-color: currentColor;
+}
+
+.tabset .panel:not(.active) {
+    display: none;
+}
+
+/* bibliographic tables */
+.bib-download {
+    display: block;
+    padding: 0 0.3em;
+}
+
+.bib-download a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    text-decoration: none;
+}
+
+.bib-download a iconify-icon {
+    font-size: 1.2rem;
+}
+
+.bib-download a:hover {
+    color: var(--color-ink);
+}
+
+.bib-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5em;
+}
+
+.bib-table th {
+    font-family: var(--font-mono);
+    text-align: left;
+    border-bottom: 2px solid var(--color-border);
+    padding: 0.5rem 1rem 0.5rem 0;
+}
+
+.bib-table td {
+    vertical-align: top;
+    padding: 0.75rem 1rem 0.75rem 0;
+}
+
+.bib-table td.year {
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    min-width: 2.5em;
+    padding-top: calc(0.75rem + 0.1rem);
+}
+
+.bib-table .title {
+    font-weight: bold;
+}
+
+.bib-table .details {
+    margin-top: var(--bib-meta-gap);
+    font-size: var(--bib-data-font-size);
+    color: var(--color-muted);
+}
+
+.bib-table .link-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.35rem 0.4rem 0.2rem 0.4rem;
+    border: 1px solid var(--color-ink);
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--color-ink);
+    font-weight: 500;
+}
+
+.btn iconify-icon {
+    margin-right: 0.3rem;
+}
+
+.btn:hover {
+    color: white;
+    background-color: var(--color-ink);
+}
+
+/* responsive design */
+@media (min-width: 992px) {
+    .page-layout {
+        max-width: 1000px;
+    }
+}
+
+@media (min-width: 576px) {
+    .name-full {
+        display: inline;
+    }
+
+    .name-short {
+        display: none;
+    }
+
+    .tabset .labels {
+        display: flex;
+    }
+
+    .tabset select {
+        display: none;
+    }
+}
