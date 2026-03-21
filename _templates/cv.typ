@@ -17,7 +17,7 @@
 #let base-size = 10.5pt  // change this to scale everything
 #let date-fmt = "[month repr:long] [year]"
 
-#set document(title: "Kenneth Blake Vernon — CV")
+#set document(title: config.full_name + " — CV")
 #set page(
   paper: "us-letter",
   margin: (x: 0.8in, y: 0.8in),
@@ -138,13 +138,14 @@
 }
 
 // ── Load Data ─────────────────────────────────────────────────────────────────
+#let config        = json("config.json")
 #let articles      = json("data/article.json").items
 #let manuscripts   = json("data/manuscript.json").items
 #let presentations = json("data/presentation.json").items
 
 // ── Header ────────────────────────────────────────────────────────────────────
 
-#text(font: mono, size: 1.55em, weight: "bold")[Kenneth Blake Vernon]
+#text(font: mono, size: 1.55em, weight: "bold")[#config.full_name]
 #v(0.5em)
 #text(size: data-font-size)[
   #grid(
@@ -157,13 +158,13 @@
       Salt Lake City, Utah 84112
     ],
     align(right)[
-      #link("https://www.kbvernon.io/")[kbvernon.io]
+      #link(config.base_url)[kbvernon.io]
       #h(0.4em) #icon-box(fa-icon("image-portrait")) \
-      #link("https://github.com/kbvernon")[kbvernon]
+      #link("https://github.com/" + config.github)[#config.github]
       #h(0.4em) #icon-box(fa-icon("github")) \
-      #link("https://orcid.org/0000-0003-0098-5092")[0000-0003-0098-5092]
+      #link("https://orcid.org/" + config.orcid)[#config.orcid]
       #h(0.4em) #icon-box(fa-icon("orcid")) \
-      #link("https://scholar.google.com/citations?user=2PE4za4AAAAJ")[2PE4za4AAAAJ]
+      #link("https://scholar.google.com/citations?user=" + config.google_scholar)[#config.google_scholar]
       #h(0.4em) #icon-box(ai-icon("google-scholar"))
     ],
   )
