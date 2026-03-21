@@ -1,0 +1,133 @@
+{%- macro icon(name) -%}<iconify-icon role="img" inline icon="{{ name }}"></iconify-icon>{%- endmacro -%}
+
+{%- macro bib_download(filename) -%}
+<div class="bib-download">
+    <a href="data/{{ filename }}" download>{{ self::icon(name="fa6-regular:floppy-disk") }}Download BibTeX</a>
+</div>
+{%- endmacro -%}
+
+{%- macro author_list(ref) -%}
+<div class="details authors">
+    {{ self::icon(name="bi:people") }}
+    {%- for a in ref.author %}
+    {{ a.given }} {{ a.family }}{% if not loop.last %}, {% endif %}
+    {%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro link_btn(href, cls, icon, label) -%}
+<a href="{{ href }}" class="btn {{ cls }}">{{ self::icon(name=icon) }}{{ label }}</a>
+{%- endmacro -%}
+
+{%- macro github_btn(href) -%}
+{{ self::link_btn(href=href, cls="btn-github", icon="fa6-brands:github", label="GitHub") }}
+{%- endmacro -%}
+
+{%- macro preprint_btn(href) -%}
+{{ self::link_btn(href=href, cls="btn-preprint", icon="bi:filetype-pdf", label="Preprint") }}
+{%- endmacro -%}
+
+{%- macro article_btn(href) -%}
+{{ self::link_btn(href=href, cls="btn-article", icon="bi:journal-text", label="Article") }}
+{%- endmacro -%}
+
+{%- macro slides_btn(href) -%}
+{{ self::link_btn(href=href, cls="btn-slides", icon="bi:journal-text", label="Slides") }}
+{%- endmacro -%}
+
+<div class="panel active" id="publications">
+    {%- set_global current_year = 0 -%}
+    {{ self::bib_download(filename="article.bib") }}
+    <table class="bib-table">
+        <tbody>
+            {%- for ref in articles %}
+            {%- set year = ref.issued["date-parts"] | first | first %}
+            <tr>
+                <td class="year">
+                    {%- if year != current_year %}
+                    {{ year }}
+                    {%- set_global current_year = year %}
+                    {%- endif %}
+                </td>
+                <td class="data">
+                    <div class="title">{{ ref.title }}</div>
+                    <div class="details ref">
+                        {%- if ref["container-title"] %}
+                        <span>{{ ref["container-title"] }}</span>
+                        {%- endif %}
+                        {%- if ref.volume %} {{ ref.volume }}{%- endif %}
+                        {%- if ref.issue %} ({{ ref.issue }}){%- endif %}
+                        {%- if ref.page %}: {{ ref.page | replace(from="--", to="-") }}{%- endif %}
+                        {%- if year %} ({{ year }}){%- endif %}
+                    </div>
+                    {{ self::author_list(ref=ref) }}
+                    {%- if ref.DOI %}
+                    <div class="details doi">
+                        {{ self::icon(name="academicons:doi") }} {{ ref.DOI }}
+                    </div>
+                    {%- endif %}
+                    <div class="link-group">
+                        {%- if ref.github %}{{ self::github_btn(href=ref.github) }}{%- endif %}
+                        {%- if ref.preprint %}{{ self::preprint_btn(href=ref.preprint) }}{%- endif %}
+                        {%- if ref.URL %}{{ self::article_btn(href=ref.URL) }}{%- endif %}
+                    </div>
+                </td>
+            </tr>
+            {%- endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="panel" id="presentations">
+    {%- set_global current_year = 0 -%}
+    {{ self::bib_download(filename="presentation.bib") }}
+    <table class="bib-table">
+        <tbody>
+            {%- for ref in presentations %}
+            {%- set year = ref.issued["date-parts"] | first | first %}
+            <tr>
+                <td class="year">
+                    {%- if year != current_year %}{{ year }}{%- set_global current_year = year %}{%- endif %}
+                </td>
+                <td class="data">
+                    <div class="title">{{ ref.title }}</div>
+                    <div class="details ref">
+                        {%- if ref["event-title"] %}{{ ref["event-title"] }}{%- endif %}
+                        {%- if ref["publisher-place"] %}, {{ ref["publisher-place"] }}{%- endif %}.
+                    </div>
+                    {{ self::author_list(ref=ref) }}
+                    <div class="link-group">
+                        {%- if ref.github %}{{ self::github_btn(href=ref.github) }}{%- endif %}
+                        {%- if ref.URL %}{{ self::slides_btn(href=ref.URL) }}{%- endif %}
+                    </div>
+                </td>
+            </tr>
+            {%- endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="panel" id="manuscripts">
+    {{ self::bib_download(filename="manuscript.bib") }}
+    <table class="bib-table">
+        <tbody>
+            {%- for ref in manuscripts %}
+            <tr>
+                <td class="year"></td>
+                <td class="data">
+                    <div class="title">{{ ref.title }}</div>
+                    <div class="details ref">
+                        {%- if ref["container-title"] %}<span>{{ ref["container-title"] }}</span>{%- endif %}
+                        {%- if ref.status %} ({{ ref.status }}){%- endif %}
+                    </div>
+                    {{ self::author_list(ref=ref) }}
+                    <div class="link-group">
+                        {%- if ref.github %}{{ self::github_btn(href=ref.github) }}{%- endif %}
+                        {%- if ref.preprint %}{{ self::preprint_btn(href=ref.preprint) }}{%- endif %}
+                    </div>
+                </td>
+            </tr>
+            {%- endfor %}
+        </tbody>
+    </table>
+</div>
