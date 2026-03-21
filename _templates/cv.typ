@@ -34,7 +34,7 @@
 #set par(leading: 0.8em, spacing: 0.75em)
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-#let icon-box(ico) = box(width: 1.1em, align(center, ico))
+#let icon-box(ico) = box(width: 1.1em, align(center + horizon, ico))
 
 #let cv-section(name) = block(sticky: true)[
   #v(1.4em)
@@ -146,6 +146,10 @@
 #let presentations = json("/data/presentation.json").items
 
 // ── Header ────────────────────────────────────────────────────────────────────
+#let url-site   = config.base_url
+#let url-github = "https://github.com/" + config.github
+#let url-orcid  = "https://orcid.org/" + config.orcid
+#let url-scholar = "https://scholar.google.com/citations?user=" + config.google_scholar
 
 #text(font: mono, size: 1.55em, weight: "bold")[#config.full_name]
 #v(0.5em)
@@ -153,21 +157,18 @@
   #grid(
     columns: (1fr, auto),
     column-gutter: 1em,
-    [
+    align(top)[
+      #set par(leading: 1.2em)
       Scientific Computing and Imaging Institute \
       University of Utah \
       72 So. Central Campus Drive Room 3750 \
       Salt Lake City, Utah 84112
     ],
-    align(right)[
-      #link(config.base_url)[kbvernon.io]
-      #h(0.4em) #icon-box(fa-icon("image-portrait")) \
-      #link("https://github.com/" + config.github)[#config.github]
-      #h(0.4em) #icon-box(fa-icon("github")) \
-      #link("https://orcid.org/" + config.orcid)[#config.orcid]
-      #h(0.4em) #icon-box(fa-icon("orcid")) \
-      #link("https://scholar.google.com/citations?user=" + config.google_scholar)[#config.google_scholar]
-      #h(0.4em) #icon-box(ai-icon("google-scholar"))
+    align(top + right)[
+      #link(url-site)[kbvernon.io] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("image-portrait"))] \
+      #link(url-github)[#config.github] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("github"))] \
+      #link(url-orcid)[#config.orcid] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("orcid"))] \
+      #link(url-scholar)[#config.google_scholar] #h(0.4em) #text(size: 1.0em)[#icon-box(ai-icon("google-scholar"))]
     ],
   )
 ]
