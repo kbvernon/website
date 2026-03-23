@@ -1,12 +1,23 @@
 {
-  "base_url": "https://www.kbvernon.io",
-  "og_image": "green_grass_valley-meta.jpg",
-  "description": "A simple website with bibliographic data.",
-  "full_name": "Kenneth Blake Vernon",
-  "short_name": "KB Vernon",
-  "email": "k.vernon@sci.utah.edu",
-  "github": "kbvernon",
-  "orcid": "0000-0003-0098-5092",
-  "google_scholar": "2PE4za4AAAAJ",
-  "cv": "cv-vernon.pdf"
+  "meta": {
+    "base_url": "https://www.kbvernon.io",
+    "og_image": "green_grass_valley-meta.jpg",
+    "description": "A simple website with bibliographic data."
+  },
+  "name": {
+    "full": "Kenneth Blake Vernon",
+    "short": "KB Vernon"
+  },
+  "links": {
+    "email": "k.vernon@sci.utah.edu",
+    "github": "kbvernon",
+    "orcid": "0000-0003-0098-5092",
+    "google_scholar": "2PE4za4AAAAJ",
+    "cv": "cv-vernon.pdf"
+  },
+  "position": {
+    "title": "One-U Responsible AI Postdoctoral Fellow",
+    "url": "https://sci.utah.edu/people/kenneth-vernon/",
+    "location": "University of Utah"
+  }
 }

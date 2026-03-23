@@ -20,7 +20,7 @@
 #let base-size = 10.5pt  // change this to scale everything
 #let date-fmt = "[month repr:long] [year]"
 
-#set document(title: config.full_name + " — CV")
+#set document(title: config.name.full + " — CV")
 #set page(
   paper: "us-letter",
   margin: (x: 0.8in, y: 0.8in),
@@ -146,12 +146,12 @@
 #let presentations = json("/data/presentation.json").items
 
 // ── Header ────────────────────────────────────────────────────────────────────
-#let url-site   = config.base_url
-#let url-github = "https://github.com/" + config.github
-#let url-orcid  = "https://orcid.org/" + config.orcid
-#let url-scholar = "https://scholar.google.com/citations?user=" + config.google_scholar
+#let url-site   = config.meta.base_url
+#let url-github = "https://github.com/" + config.links.github
+#let url-orcid  = "https://orcid.org/" + config.links.orcid
+#let url-scholar = "https://scholar.google.com/citations?user=" + config.links.google_scholar
 
-#text(font: mono, size: 1.55em, weight: "bold")[#config.full_name]
+#text(font: mono, size: 1.55em, weight: "bold")[#config.name.full]
 #v(0.5em)
 #text(size: data-font-size)[
   #grid(
@@ -165,9 +165,9 @@
     ],
     align(top + right)[
       #link(url-site)[kbvernon.io] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("image-portrait"))] \
-      #link(url-github)[#config.github] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("github"))] \
-      #link(url-orcid)[#config.orcid] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("orcid"))] \
-      #link(url-scholar)[#config.google_scholar] #h(0.4em) #text(size: 1.0em)[#icon-box(ai-icon("google-scholar"))]
+      #link(url-github)[#config.links.github] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("github"))] \
+      #link(url-orcid)[#config.links.orcid] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("orcid"))] \
+      #link(url-scholar)[#config.links.google_scholar] #h(0.4em) #text(size: 1.0em)[#icon-box(ai-icon("google-scholar"))]
     ],
   )
 ]

@@ -1,8 +1,8 @@
-{%- set href_email = "mailto:" ~ email -%}
-{%- set href_githb = "https://github.com/" ~ github ~ "/" -%}
-{%- set href_orcid = "https://orcid.org/" ~ orcid -%}
-{%- set href_schlr = "https://scholar.google.com/citations?user=" ~ google_scholar ~ "&hl=en" -%}
-{%- set href_crmvt = "pdfs/" ~ cv -%}
+{%- set href_email = "mailto:" ~ links.email -%}
+{%- set href_githb = "https://github.com/" ~ links.github ~ "/" -%}
+{%- set href_orcid = "https://orcid.org/" ~ links.orcid -%}
+{%- set href_schlr = "https://scholar.google.com/citations?user=" ~ links.google_scholar ~ "&hl=en" -%}
+{%- set href_crmvt = "pdfs/" ~ links.cv -%}
 {%- set icon_email = '<iconify-icon icon="bi:envelope"></iconify-icon>' -%}
 {%- set icon_githb = '<iconify-icon icon="fa6-brands:github"></iconify-icon>' -%}
 {%- set icon_orcid = '<iconify-icon icon="fa6-brands:orcid"></iconify-icon>' -%}
@@ -13,13 +13,13 @@
 <html lang="en">
 
 <head>
-    <title>{{ full_name }}</title>
+    <title>{{ name.full }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta property="og:title" content="{{ full_name }}">
-    <meta property="og:description" content="{{ description }}">
-    <meta property="og:url" content="{{ base_url }}">
-    <meta property="og:image" content="{{ base_url }}/assets/{{ og_image }}">
+    <meta property="og:title" content="{{ name.full }}">
+    <meta property="og:description" content="{{ meta.description }}">
+    <meta property="og:url" content="{{ meta.base_url }}">
+    <meta property="og:image" content="{{ meta.base_url }}/assets/{{ meta.og_image }}">
     <link rel="stylesheet" href="assets/theme.css">
     <link rel="icon" href="assets/favicon.png">
     <script src="assets/iconify-icon.min.js" defer></script>
@@ -31,8 +31,8 @@
         <nav>
             <div class="content-container">
                 <h1>
-                    <span class="name-full">{{ full_name }}</span>
-                    <span class="name-short">{{ short_name }}</span>
+                    <span class="name-full">{{ name.full }}</span>
+                    <span class="name-short">{{ name.short }}</span>
                 </h1>
                 <ul class="icons">
                     <li><a href="{{ href_email }}">{{ icon_email }}</a></li>

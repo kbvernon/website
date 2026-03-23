@@ -89,16 +89,10 @@ config <- read_json("config.json")
 tera$render(
   "index.html",
   outfile = file.path(site_dir, "index.html"),
-  base_url = config[["base_url"]],
-  og_image = config[["og_image"]],
-  description = config[["description"]],
-  full_name = config[["full_name"]],
-  short_name = config[["short_name"]],
-  email = config[["email"]],
-  github = config[["github"]],
-  orcid = config[["orcid"]],
-  google_scholar = config[["google_scholar"]],
-  cv = config[["cv"]],
+  meta = config[["meta"]],
+  name = config[["name"]],
+  links = config[["links"]],
+  position = config[["position"]],
   articles = bibs[["article"]],
   manuscripts = bibs[["manuscript"]],
   presentations = bibs[["presentation"]]
@@ -112,7 +106,7 @@ status <- system2(
     "--root .",
     "--font-path assets/",
     "_templates/cv.typ",
-    sprintf("pdfs/%s", config[["cv"]])
+    sprintf("pdfs/%s", config[["links"]][["cv"]])
   )
 )
 
