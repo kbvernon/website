@@ -35,7 +35,7 @@
 {{ self::link_btn(href=href, cls="btn-slides", icon="bi:journal-text", label="Slides") }}
 {%- endmacro -%}
 
-<div class="panel active" id="publications">
+<div class="panel active" id="publications" role="tabpanel" aria-labelledby="tab-publications">
     {%- set_global current_year = 0 -%}
     {{ self::bib_download(filename="article.bib") }}
     <table class="bib-table">
@@ -78,7 +78,7 @@
     </table>
 </div>
 
-<div class="panel" id="presentations">
+<div class="panel" id="presentations" role="tabpanel" aria-labelledby="tab-presentations">
     {%- set_global current_year = 0 -%}
     {{ self::bib_download(filename="presentation.bib") }}
     <table class="bib-table">
@@ -107,7 +107,7 @@
     </table>
 </div>
 
-<div class="panel" id="manuscripts">
+<div class="panel" id="manuscripts" role="tabpanel" aria-labelledby="tab-manuscripts">
     {{ self::bib_download(filename="manuscript.bib") }}
     <table class="bib-table">
         <tbody>

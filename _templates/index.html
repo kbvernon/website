@@ -35,11 +35,11 @@
                     <span class="name-short">{{ name.short }}</span>
                 </h1>
                 <ul class="icons">
-                    <li><a href="{{ href_email }}">{{ icon_email }}</a></li>
-                    <li><a href="{{ href_githb }}">{{ icon_githb }}</a></li>
-                    <li><a href="{{ href_orcid }}">{{ icon_orcid }}</a></li>
-                    <li><a href="{{ href_schlr }}">{{ icon_schlr }}</a></li>
-                    <li><a href="{{ href_crmvt }}">{{ icon_crmvt }}</a></li>
+                    <li><a href="{{ href_email }}" aria-label="Email">{{ icon_email }}</a></li>
+                    <li><a href="{{ href_githb }}" aria-label="GitHub">{{ icon_githb }}</a></li>
+                    <li><a href="{{ href_orcid }}" aria-label="ORCID">{{ icon_orcid }}</a></li>
+                    <li><a href="{{ href_schlr }}" aria-label="Google Scholar">{{ icon_schlr }}</a></li>
+                    <li><a href="{{ href_crmvt }}" aria-label="CV">{{ icon_crmvt }}</a></li>
                 </ul>
             </div>
         </nav>
@@ -49,12 +49,15 @@
                     {% include "about.html" -%}
                 </div>
                 <div class="tabset">
-                    <div class="labels">
-                        <button class="label active" data-tab="publications">Publications</button>
-                        <button class="label" data-tab="presentations">Presentations</button>
-                        <button class="label" data-tab="manuscripts">Manuscripts</button>
+                    <div class="labels" role="tablist">
+                        <button class="label active" id="tab-publications" role="tab" aria-selected="true"
+                            aria-controls="publications" data-tab="publications">Publications</button>
+                        <button class="label" id="tab-presentations" role="tab" aria-selected="false"
+                            aria-controls="presentations" data-tab="presentations">Presentations</button>
+                        <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
+                            aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
                     </div>
-                    <select id="tab-select">
+                    <select id="tab-select" aria-label="Select bibliography">
                         <option value="publications">Publications</option>
                         <option value="presentations">Presentations</option>
                         <option value="manuscripts">Manuscripts</option>
