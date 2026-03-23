@@ -24,11 +24,11 @@
                     <span class="name-short">KB Vernon</span>
                 </h1>
                 <ul class="icons">
-                    <li><a href="mailto:k.vernon@sci.utah.edu"><iconify-icon icon="bi:envelope"></iconify-icon></a></li>
-                    <li><a href="https://github.com/kbvernon/"><iconify-icon icon="fa6-brands:github"></iconify-icon></a></li>
-                    <li><a href="https://orcid.org/0000-0003-0098-5092"><iconify-icon icon="fa6-brands:orcid"></iconify-icon></a></li>
-                    <li><a href="https://scholar.google.com/citations?user=2PE4za4AAAAJ&hl=en"><iconify-icon icon="academicons:google-scholar"></iconify-icon></a></li>
-                    <li><a href="pdfs/cv-vernon.pdf"><iconify-icon icon="academicons:cv"></iconify-icon></a></li>
+                    <li><a href="mailto:k.vernon@sci.utah.edu" aria-label="Email"><iconify-icon icon="bi:envelope"></iconify-icon></a></li>
+                    <li><a href="https://github.com/kbvernon/" aria-label="GitHub"><iconify-icon icon="fa6-brands:github"></iconify-icon></a></li>
+                    <li><a href="https://orcid.org/0000-0003-0098-5092" aria-label="ORCID"><iconify-icon icon="fa6-brands:orcid"></iconify-icon></a></li>
+                    <li><a href="https://scholar.google.com/citations?user=2PE4za4AAAAJ&hl=en" aria-label="Google Scholar"><iconify-icon icon="academicons:google-scholar"></iconify-icon></a></li>
+                    <li><a href="pdfs/cv-vernon.pdf" aria-label="CV"><iconify-icon icon="academicons:cv"></iconify-icon></a></li>
                 </ul>
             </div>
         </nav>
@@ -71,18 +71,21 @@
   <p>In my spare time, I also contribute to several FOSS projects in the R community.</p>
 </section></div>
                 <div class="tabset">
-                    <div class="labels">
-                        <button class="label active" data-tab="publications">Publications</button>
-                        <button class="label" data-tab="presentations">Presentations</button>
-                        <button class="label" data-tab="manuscripts">Manuscripts</button>
+                    <div class="labels" role="tablist">
+                        <button class="label active" id="tab-publications" role="tab" aria-selected="true"
+                            aria-controls="publications" data-tab="publications">Publications</button>
+                        <button class="label" id="tab-presentations" role="tab" aria-selected="false"
+                            aria-controls="presentations" data-tab="presentations">Presentations</button>
+                        <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
+                            aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
                     </div>
-                    <select id="tab-select">
+                    <select id="tab-select" aria-label="Select bibliography">
                         <option value="publications">Publications</option>
                         <option value="presentations">Presentations</option>
                         <option value="manuscripts">Manuscripts</option>
                     </select>
                     <div class="panels">
-                        <div class="panel active" id="publications"><div class="bib-download">
+                        <div class="panel active" id="publications" role="tabpanel" aria-labelledby="tab-publications"><div class="bib-download">
     <a href="data/article.bib" download><iconify-icon role="img" inline icon="fa6-regular:floppy-disk"></iconify-icon>Download BibTeX</a>
 </div>
     <table class="bib-table">
@@ -599,7 +602,7 @@
     </table>
 </div>
 
-<div class="panel" id="presentations"><div class="bib-download">
+<div class="panel" id="presentations" role="tabpanel" aria-labelledby="tab-presentations"><div class="bib-download">
     <a href="data/presentation.bib" download><iconify-icon role="img" inline icon="fa6-regular:floppy-disk"></iconify-icon>Download BibTeX</a>
 </div>
     <table class="bib-table">
@@ -913,7 +916,7 @@
     </table>
 </div>
 
-<div class="panel" id="manuscripts">
+<div class="panel" id="manuscripts" role="tabpanel" aria-labelledby="tab-manuscripts">
     <div class="bib-download">
     <a href="data/manuscript.bib" download><iconify-icon role="img" inline icon="fa6-regular:floppy-disk"></iconify-icon>Download BibTeX</a>
 </div>
