@@ -130,6 +130,29 @@ nav ul.icons a:hover {
     color: var(--color-muted);
 }
 
+/* about page */
+.about section h2 {
+    margin-top: 1.5em;
+    margin-bottom: 0;
+    font-weight: 300;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-body);
+    color: var(--color-muted);
+}
+
+.about section h2+p {
+    margin-top: 0;
+}
+
+.about a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.about a:hover {
+    color: var(--color-muted);
+}
+
 /* tabset */
 .tabset {
     margin-top: 2.5em;
