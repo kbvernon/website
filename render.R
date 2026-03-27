@@ -81,7 +81,7 @@ bibs <- lapply(bibs, \(bib) inject_note_fields(bib[["items"]]))
 bibs <- setNames(bibs, collections)
 
 # render website ---------------------------------------------------------
-tera <- new_engine("_templates/*.html")
+tera <- new_engine("templates/*.html")
 tera$autoescape_off()
 
 config <- read_json("config.json")
@@ -104,8 +104,8 @@ status <- system2(
   args = c(
     "compile",
     "--root .",
-    "--font-path assets/",
-    "_templates/cv.typ",
+    "--font-path web/fonts/",
+    "templates/cv.typ",
     sprintf("pdfs/%s", config[["links"]][["cv"]])
   )
 )
@@ -120,7 +120,7 @@ file.remove(json_files)
 
 # copy files to _site/ ---------------------------------------------------
 lapply(
-  c("assets", "data", "pdfs"),
+  c("data", "pdfs", "web"),
   file.copy,
   to = site_dir,
   recursive = TRUE,

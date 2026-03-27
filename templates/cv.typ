@@ -1,6 +1,6 @@
 // ── Packages ──────────────────────────────────────────────────────────────────
-#import "@preview/fontawesome:0.6.0": fa-icon
-#import "@preview/use-academicons:0.1.0": *
+#import "/typst/fontawesome/lib.typ": fa-icon
+#import "/typst/academicicons/lib.typ": *
 
 // ── Fonts & Colors ────────────────────────────────────────────────────────────
 #let sans = "Noto Sans"
