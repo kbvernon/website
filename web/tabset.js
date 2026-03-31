@@ -10,6 +10,7 @@ function activateTab(id) {
     if (panel) panel.classList.add('active');
     const sel = document.getElementById('tab-select');
     if (sel) sel.value = id;
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
 }
 
 document.querySelectorAll('.tabset .label').forEach(btn => {
