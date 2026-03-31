@@ -4,7 +4,7 @@
 
 // ── Fonts & Colors ────────────────────────────────────────────────────────────
 #let sans = "Noto Sans"
-#let mono = "IBM Plex Mono"
+#let mono = "Source Code Pro"
 
 #let ink    = black
 #let muted  = rgb("#555555")
@@ -38,7 +38,7 @@
 
 #let cv-section(name) = block(sticky: true)[
   #v(1.4em)
-  #text(font: mono, size: 0.82em, weight: "bold")[#upper(name)]
+  #text(font: mono, size: 0.82em, weight: "regular")[#upper(name)]
   #v(-2pt)
   #line(length: 100%, stroke: 0.2pt + border)
   #v(0.4em)
@@ -49,7 +49,7 @@
   block(breakable: false, grid(
     columns: (3em, 1fr),
     column-gutter: 0.75em,
-    align(top + right, pad(top: 0.1em, text(font: mono, size: data-font-size, fill: muted, year))),
+    align(top + right, pad(top: 0.1em, text(font: mono, size: data-font-size, fill: muted, weight: "regular", year))),
     align(top, body),
   ))
   v(bspace)

@@ -104,7 +104,7 @@ status <- system2(
   args = c(
     "compile",
     "--root .",
-    "--font-path web/fonts/",
+    "--font-path typst/fonts/",
     "templates/cv.typ",
     sprintf("pdfs/%s", config[["links"]][["cv"]])
   )
