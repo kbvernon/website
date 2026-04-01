@@ -32,8 +32,10 @@
         <nav>
             <div class="content-container">
                 <h1>
-                    <span class="name-full">{{ name.full }}</span>
-                    <span class="name-short">{{ name.short }}</span>
+                    <a href="{{ meta.base_url }}">
+                        <span class="name-full">{{ name.full }}</span>
+                        <span class="name-short">{{ name.short }}</span>
+                    </a>
                 </h1>
                 <ul class="icons">
                     <li><a href="{{ href_email }}" aria-label="Email">{{ icon_email }}</a></li>
