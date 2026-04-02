@@ -32,6 +32,7 @@
 )
 #set text(font: sans, size: base-size, fill: ink)
 #set par(leading: 0.8em, spacing: 0.75em)
+#show strong: set text(weight: "medium")
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 #let icon-box(ico) = box(width: 1.1em, align(center + horizon, ico))
