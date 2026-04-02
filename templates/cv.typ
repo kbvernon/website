@@ -178,7 +178,9 @@
 #entry("2025")[
   *One-U Responsible AI Postdoctoral Fellow* \
   #meta[
-    Scientific Computing and Imaging Institute; School of Environment, Society, and Sustainability, University of Utah
+    Scientific Computing and Imaging Institute \
+    School of Environment, Society, and Sustainability \ 
+    University of Utah
   ]
 ]
 #entry("2022")[
