@@ -284,9 +284,9 @@
 #plain-entry[
   *Teaching interests* \
   #meta[
-    Behavioral Ecology, Urban Science, Environmental Data Science, Statistics,
-    Geography, Conservation & Sustainability, Human Prehistory, 
-    North American Prehistory.
+    Behavioral Ecology, Environmental Data Science, Statistics, Urban and 
+    Economic Geography, Conservation & Sustainability, Demography, Human 
+    Prehistory.
   ]
 ]
 
