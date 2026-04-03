@@ -119,9 +119,8 @@ if (status != 0) {
 file.remove(json_files)
 
 # copy files to _site/ ---------------------------------------------------
-lapply(
+file.copy(
   c("data", "pdfs", "web"),
-  file.copy,
   to = site_dir,
   recursive = TRUE,
   overwrite = TRUE
