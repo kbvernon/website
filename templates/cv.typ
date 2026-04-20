@@ -110,6 +110,25 @@
   ]
 }
 
+#let fmt-manuscript(item) = {
+  let title   = item.at("title", default: "")
+  let authors = fmt-authors(item.at("author", default: ()))
+  let journal = item.at("container-title", default: "")
+  let status  = item.at("status", default: "")
+
+  let ref-line = journal
+  if status != "" and journal != "" { ref-line += " (" + status + ")" }
+  else if status != "" { ref-line = "(" + status + ")" }
+
+  [
+    *#title* \
+    #if ref-line != "" [
+      #meta[#ref-line] \
+    ]
+    #meta[#authors]
+  ]
+}
+
 #let fmt-presentation(item) = {
   let title   = item.at("title", default: "")
   let authors = fmt-authors(item.at("author", default: ()))
@@ -212,7 +231,7 @@
 // ── Manuscripts ──────────────────────────────────────────────────────────────
 #cv-section("Manuscripts")
 
-#bib-block(manuscripts, fmt-article)
+#bib-block(manuscripts, fmt-manuscript)
 
 // ── Grants, Fellowships, and Awards ──────────────────────────────────────────
 #cv-section("Grants, Fellowships, and Awards")
