@@ -1,6 +1,7 @@
 library(extera)
 library(httr2)
 library(jsonlite)
+library(tynding)
 
 collections <- c("article", "manuscript", "presentation")
 
@@ -70,6 +71,14 @@ for (collection in collections) {
     items[[i]] <- item
   }
 
+  # inject year into manuscript items
+  if (collection == "manuscript") {
+    for (i in seq_along(items)) {
+      year <- as.integer(format(Sys.Date(), "%Y"))
+      items[[i]][["issued"]][["date-parts"]][[1]][[1]] <- year
+    }
+  }
+
   # zotero api sort is not fully deterministic, so do additional sort
   if (collection == "manuscript") {
     status <- vapply(items, \(x) x[["status"]] %||% "", character(1))
@@ -120,20 +129,12 @@ tera$render(
 )
 
 # render cv --------------------------------------------------------------
-status <- system2(
-  "typst",
-  args = c(
-    "compile",
-    "--root .",
-    "--font-path typst/fonts/",
-    "templates/cv.typ",
-    sprintf("pdfs/%s", metadata[["links"]][["cv"]])
-  )
+typst_compile(
+  "templates/cv.typ",
+  output = sprintf("pdfs/%s", metadata[["links"]][["cv"]]),
+  font_path = "typst/fonts/",
+  root = "."
 )
-
-if (status != 0) {
-  stop("typst compile failed with status ", status)
-}
 
 # clean up ---------------------------------------------------------------
 # remove json now that everything has compiled

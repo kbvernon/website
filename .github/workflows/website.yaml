@@ -27,13 +27,10 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Setup Typst
-        uses: typst-community/setup-typst@v5
-
       - name: Install R packages
         run: |
           install.packages("pak")
-          pak::pak(c("httr2", "jsonlite", "kbvernon/extera"))
+          pak::pak(c("httr2", "jsonlite", "kbvernon/extera", "y-sunflower/tynding"))
         shell: Rscript {0}
 
       - name: Render
