@@ -21,11 +21,12 @@ writeLines("", file.path(site_dir, ".nojekyll"))
 # map custom domain to gh pages
 writeLines("www.kbvernon.io", file.path(site_dir, "CNAME"))
 
-# download zotero data ---------------------------------------------------
+
+# download and process zotero data ---------------------------------------
 download_zotero <- function(x, format) {
   collection <- paste0("ZOTERO_", toupper(x))
 
-  zotero_request <- req_url_path_append(
+  zotero_endpoint <- req_url_path_append(
     request("https://api.zotero.org"),
     "users",
     Sys.getenv("ZOTERO_ID"),
@@ -35,7 +36,7 @@ download_zotero <- function(x, format) {
   )
 
   zotero_request <- req_url_query(
-    zotero_request,
+    zotero_endpoint,
     key = Sys.getenv("ZOTERO_KEY"),
     itemType = "-note",
     format = format,
@@ -46,38 +47,58 @@ download_zotero <- function(x, format) {
 
   zotero_response <- req_perform(zotero_request)
 
-  ext <- if (format == "csljson") "json" else "bib"
-
-  writeLines(
-    resp_body_string(zotero_response),
-    file.path(data_dir, paste0(x, ".", ext))
-  )
+  resp_body_string(zotero_response)
 }
 
 for (collection in collections) {
-  download_zotero(collection, "csljson")
-  download_zotero(collection, "bibtex")
-}
+  # download csl json
+  zotero <- parse_json(download_zotero(collection, "csljson"))
+  items <- zotero[["items"]]
 
-# inject note fields into csljson ----------------------------------------
-inject_note_fields <- function(items) {
-  lapply(items, function(item) {
+  # unnest note field
+  for (i in seq_along(items)) {
+    item <- items[[i]]
     note <- item[["note"]]
-    if (is.null(note)) {
-      return(item)
+    if (!is.null(note)) {
+      lines <- gsub("\\\\", "", strsplit(note, "\n")[[1]])
+      for (line in lines) {
+        key <- sub(":.*", "", line)
+        value <- sub(".*: ", "", line)
+        item[[key]] <- value
+      }
     }
-    lines <- gsub("\\\\", "", strsplit(note, "\n")[[1]])
-    for (line in lines) {
-      item[[sub(":.*", "", line)]] <- sub(".*: ", "", line)
-    }
-    item
-  })
+    items[[i]] <- item
+  }
+
+  # zotero api sort is not fully deterministic, so do additional sort
+  if (collection == "manuscript") {
+    status <- vapply(items, \(x) x[["status"]] %||% "", character(1))
+    title <- vapply(items, \(x) x[["title"]] %||% "", character(1))
+    idx <- order(-xtfrm(status), title)
+  } else {
+    date_parts <- lapply(items, \(x) x[["issued"]][["date-parts"]][[1]])
+    year <- vapply(date_parts, \(x) as.integer(x[[1]]) %||% 0L, integer(1))
+    title <- vapply(items, \(x) x[["title"]] %||% "", character(1))
+    idx <- order(-year, title)
+  }
+  zotero[["items"]] <- items[idx]
+
+  # write json
+  writeLines(
+    toJSON(zotero, auto_unbox = TRUE),
+    file.path(data_dir, paste0(collection, ".json"))
+  )
+
+  # download and write bibtex
+  writeLines(
+    download_zotero(collection, "bibtex"),
+    file.path(data_dir, paste0(collection, ".bib"))
+  )
 }
 
 json_files <- file.path(data_dir, paste0(collections, ".json"))
-
 bibs <- lapply(json_files, read_json)
-bibs <- lapply(bibs, \(bib) inject_note_fields(bib[["items"]]))
+bibs <- lapply(bibs, \(x) x[["items"]])
 bibs <- setNames(bibs, collections)
 
 # render website ---------------------------------------------------------
