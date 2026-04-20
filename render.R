@@ -84,15 +84,15 @@ bibs <- setNames(bibs, collections)
 tera <- new_engine("templates/*.html")
 tera$autoescape_off()
 
-config <- read_json("config.json")
+metadata <- read_json("metadata.json")
 
 tera$render(
   "index.html",
   outfile = file.path(site_dir, "index.html"),
-  meta = config[["meta"]],
-  name = config[["name"]],
-  links = config[["links"]],
-  position = config[["position"]],
+  meta = metadata[["meta"]],
+  name = metadata[["name"]],
+  links = metadata[["links"]],
+  position = metadata[["position"]],
   articles = bibs[["article"]],
   manuscripts = bibs[["manuscript"]],
   presentations = bibs[["presentation"]]
@@ -106,7 +106,7 @@ status <- system2(
     "--root .",
     "--font-path typst/fonts/",
     "templates/cv.typ",
-    sprintf("pdfs/%s", config[["links"]][["cv"]])
+    sprintf("pdfs/%s", metadata[["links"]][["cv"]])
   )
 )
 

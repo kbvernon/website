@@ -1,8 +1,8 @@
-// ── Packages ──────────────────────────────────────────────────────────────────
+// ── Packages ─────────────────────────────────────────────────────────────────
 #import "/typst/fontawesome/lib.typ": fa-icon
 #import "/typst/academicicons/lib.typ": *
 
-// ── Fonts & Colors ────────────────────────────────────────────────────────────
+// ── Fonts & Colors ───────────────────────────────────────────────────────────
 #let sans = "Noto Sans"
 #let mono = "Source Code Pro"
 
@@ -13,14 +13,14 @@
 #let data-font-size = 0.9em
 #let meta(body) = text(fill: muted, size: data-font-size, body)
 
-// ── Load Config ───────────────────────────────────────────────────────────────
-#let config = json("/config.json")
+// ── Load metadata ────────────────────────────────────────────────────────────
+#let metadata = json("/metadata.json")
 
-// ── Page Setup ────────────────────────────────────────────────────────────────
+// ── Page Setup ───────────────────────────────────────────────────────────────
 #let base-size = 10.5pt  // change this to scale everything
 #let date-fmt = "[month repr:long] [year]"
 
-#set document(title: config.name.full + " — CV")
+#set document(title: metadata.name.full + " — CV")
 #set page(
   paper: "us-letter",
   margin: (x: 0.8in, y: 0.8in),
@@ -34,7 +34,7 @@
 #set par(leading: 0.8em, spacing: 0.75em)
 #show strong: set text(weight: "medium")
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Helpers ──────────────────────────────────────────────────────────────────
 #let icon-box(ico) = box(width: 1.1em, align(center + horizon, ico))
 
 #let cv-section(name) = block(sticky: true)[
@@ -66,7 +66,7 @@
   v(0.45em)
 }
 
-// ── Data Helpers ──────────────────────────────────────────────────────────────
+// ── Data Helpers ─────────────────────────────────────────────────────────────
 #let fmt-authors(authors) = {
   let names = authors.map(a => {
     a.at("given", default: "") + " " + a.at("family", default: "")
@@ -141,18 +141,18 @@
   }
 }
 
-// ── Load Data ─────────────────────────────────────────────────────────────────
+// ── Load Data ────────────────────────────────────────────────────────────────
 #let articles      = json("/data/article.json").items
 #let manuscripts   = json("/data/manuscript.json").items
 #let presentations = json("/data/presentation.json").items
 
-// ── Header ────────────────────────────────────────────────────────────────────
-#let url-site   = config.meta.base_url
-#let url-github = "https://github.com/" + config.links.github
-#let url-orcid  = "https://orcid.org/" + config.links.orcid
-#let url-scholar = "https://scholar.google.com/citations?user=" + config.links.google_scholar
+// ── Header ───────────────────────────────────────────────────────────────────
+#let url-site   = metadata.meta.base_url
+#let url-github = "https://github.com/" + metadata.links.github
+#let url-orcid  = "https://orcid.org/" + metadata.links.orcid
+#let url-scholar = "https://scholar.google.com/citations?user=" + metadata.links.google_scholar
 
-#text(font: mono, size: 1.55em, weight: "bold")[#config.name.full]
+#text(font: mono, size: 1.55em, weight: "bold")[#metadata.name.full]
 #v(0.5em)
 #text(size: data-font-size)[
   #grid(
@@ -166,14 +166,14 @@
     ],
     align(top + right)[
       #link(url-site)[kbvernon.io] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("image-portrait"))] \
-      #link(url-github)[#config.links.github] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("github"))] \
-      #link(url-orcid)[#config.links.orcid] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("orcid"))] \
-      #link(url-scholar)[#config.links.google_scholar] #h(0.4em) #text(size: 1.0em)[#icon-box(ai-icon("google-scholar"))]
+      #link(url-github)[#metadata.links.github] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("github"))] \
+      #link(url-orcid)[#metadata.links.orcid] #h(0.4em) #text(size: 1.0em)[#icon-box(fa-icon("orcid"))] \
+      #link(url-scholar)[#metadata.links.google_scholar] #h(0.4em) #text(size: 1.0em)[#icon-box(ai-icon("google-scholar"))]
     ],
   )
 ]
 
-// ── Professional Appointments ─────────────────────────────────────────────────
+// ── Professional Appointments ────────────────────────────────────────────────
 #cv-section("Professional Appointments")
 
 #entry("2025")[
@@ -197,19 +197,19 @@
   ]
 ]
 
-// ── Education ─────────────────────────────────────────────────────────────────
+// ── Education ────────────────────────────────────────────────────────────────
 #cv-section("Education")
 
 #entry("2022")[*PhD in Anthropology* #h(0.3em) #text(fill: muted)[ | University of Utah, Salt Lake City, UT]]
 #entry("2009")[*MA in Philosophy* #h(0.3em) #text(fill: muted)[ | Northern Illinois University, DeKalb, IL]]
 #entry("2006")[*BA in History and Philosophy* #h(0.3em) #text(fill: muted)[ | University of Central Arkansas, Conway, AR]]
 
-// ── Peer-reviewed Articles ────────────────────────────────────────────────────
+// ── Peer-reviewed Articles ───────────────────────────────────────────────────
 #cv-section("Peer-reviewed Journal Articles")
 
 #bib-block(articles, fmt-article)
 
-// ── Manuscripts ───────────────────────────────────────────────────────────────
+// ── Manuscripts ──────────────────────────────────────────────────────────────
 #cv-section("Manuscripts")
 
 #bib-block(manuscripts, fmt-article)
@@ -273,12 +273,12 @@
   PI: Brian F. Codding | \$22,066]
 ]
 
-// ── Presentations ─────────────────────────────────────────────────────────────
+// ── Presentations ────────────────────────────────────────────────────────────
 #cv-section("Presentations")
 
 #bib-block(presentations, fmt-presentation)
 
-// ── Teaching ──────────────────────────────────────────────────────────────────
+// ── Teaching ─────────────────────────────────────────────────────────────────
 #cv-section("Teaching")
 
 #plain-entry[
@@ -299,7 +299,7 @@
   ]
 ]
 
-// ── Professional Affiliations ─────────────────────────────────────────────────
+// ── Professional Affiliations ────────────────────────────────────────────────
 #cv-section("Professional Affiliations")
 
 #entry("2016", bspace: 0.3em)[Great Basin Anthropological Association]
@@ -307,7 +307,7 @@
 #entry("2022", bspace: 0.3em)[Coalition for Archaeological Synthesis]
 #entry("2023", bspace: 0.3em)[European Association of Archaeologists]
 
-// ── Service ───────────────────────────────────────────────────────────────────
+// ── Service ──────────────────────────────────────────────────────────────────
 #cv-section("Service, Outreach, and Other Activities")
 
 #entry("2022")[
@@ -327,7 +327,7 @@
   #meta[Brief Amici Curiae of Archaeological Organizations in Support of Plaintiffs. Contributor.]
 ]
 
-// ── References ────────────────────────────────────────────────────────────────
+// ── References ───────────────────────────────────────────────────────────────
 #cv-section("References")
 
 #text(style: "italic")[Available upon request.]
