@@ -1,0 +1,120 @@
+{
+  "items": [
+    {
+      "year": 2025,
+      "title": "extendr: Community-focused development for scientific computing with Rust and R",
+      "program": "ISC Grant",
+      "funder": "R Consortium",
+      "pi": [
+        "Kenneth B. Vernon",
+        "Josiah Parry",
+        "Mossa M. Reimert"
+      ],
+      "amount": 4000
+    },
+    {
+      "year": 2022,
+      "title": "Archaeological Survey of Cottonwood Wash, San Rafael Desert, Emery County, Utah",
+      "program": "Cooperative Agreement (L20AC00267)",
+      "funder": "Bureau of Land Management",
+      "pi": [
+        "Brian F. Codding",
+        "Jerry D. Spangler"
+      ],
+      "amount": 18698
+    },
+    {
+      "year": 2020,
+      "title": "Developing a Modular Online Introduction to the R Environment",
+      "program": "Cross-College Training Grant",
+      "funder": "University of Utah College of Social and Behavioral Sciences",
+      "pi": [
+        "Simon Brewer",
+        "Brian F. Codding",
+        "Kenneth B. Vernon"
+      ],
+      "amount": 21020
+    },
+    {
+      "year": 2020,
+      "title": "Advancing Stewardship with Theory and Models",
+      "program": "David C. Williams Memorial Graduate Fellowship",
+      "funder": "University of Utah",
+      "pi": [
+        "Kenneth B. Vernon"
+      ],
+      "amount": 6000
+    },
+    {
+      "year": 2019,
+      "title": "Graduate Research",
+      "program": "Earl and Elies Skidmore Endowed Graduate Fellowship",
+      "funder": "University of Utah",
+      "pi": [
+        "Kenneth B. Vernon"
+      ],
+      "amount": 7500
+    },
+    {
+      "year": 2019,
+      "title": "Advancing Stewardship with Theory and Models",
+      "program": "David C. Williams Memorial Graduate Fellowship",
+      "funder": "University of Utah",
+      "pi": [
+        "Kenneth B. Vernon"
+      ],
+      "amount": 8500
+    },
+    {
+      "year": 2018,
+      "title": "Why Were Prehistoric Agricultural Societies in Utah Unable to Adapt to the Medieval Megadroughts?",
+      "program": "Interdisciplinary Faculty Research Seed Grant",
+      "funder": "University of Utah Global Change and Sustainability Center",
+      "pi": [
+        "Brian F. Codding",
+        "Simon Brewer"
+      ],
+      "amount": 20000
+    },
+    {
+      "year": 2018,
+      "title": "Advancing Stewardship with Theory and Models",
+      "program": "David C. Williams Memorial Graduate Fellowship",
+      "funder": "University of Utah",
+      "pi": [
+        "Kenneth B. Vernon"
+      ],
+      "amount": 1000
+    },
+    {
+      "year": 2017,
+      "title": "Human Plant Use in Red Butte Canyon",
+      "program": "Research Grant",
+      "funder": "Friends of Red Butte",
+      "pi": [
+        "Kenneth B. Vernon"
+      ],
+      "amount": 2000
+    },
+    {
+      "year": 2017,
+      "title": "Human Plant Use in Red Butte Canyon",
+      "program": "Research Grant",
+      "funder": "University of Utah Global Change and Sustainability Center",
+      "pi": [
+        "Kenneth B. Vernon"
+      ],
+      "amount": 3000
+    },
+    {
+      "year": 2017,
+      "title": "Archaeological Sites as Endangered Species: Using Next Generation Models to Predict and Protect Cultural Properties on the Grand Staircase-Escalante National Monument",
+      "program": "Grand Staircase-Escalante National Monument Cooperative Agreement",
+      "funder": "Bureau of Land Management",
+      "pi": [
+        "Brian F. Codding"
+      ],
+      "amount": 22066
+    }
+  ]
+}
