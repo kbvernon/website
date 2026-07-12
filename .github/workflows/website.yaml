@@ -12,12 +12,13 @@ jobs:
   render-and-deploy:
     runs-on: ubuntu-latest
     env:
+      CHROME_BIN: google-chrome
       ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
       ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
       ZOTERO_ARTICLE: ${{ secrets.ZOTERO_ARTICLE }}
       ZOTERO_MANUSCRIPT: ${{ secrets.ZOTERO_MANUSCRIPT }}
       ZOTERO_PRESENTATION: ${{ secrets.ZOTERO_PRESENTATION }}
-      R_CACHE_VERSION: 1
+      R_CACHE_VERSION: 2
 
     steps:
       - name: Checkout
@@ -38,11 +39,16 @@ jobs:
       - name: Install R packages
         run: |
           install.packages("pak")
-          pak::pak(c("httr2", "jsonlite", "kbvernon/extera", "y-sunflower/tynding"))
+          pak::pak(c("httr2", "jsonlite"))
         shell: Rscript {0}
 
+      - name: Install just and Zola
+        uses: taiki-e/install-action@v2
+        with:
+          tool: just, zola
+
       - name: Render
-        run: Rscript render.R
+        run: just download build
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
@@ -50,4 +56,4 @@ jobs:
         with:
           clean: true
           branch: gh-pages
-          folder: _site
+          folder: public

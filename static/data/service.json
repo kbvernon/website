@@ -1,0 +1,33 @@
+{
+  "items": [
+    {
+      "year": 2022,
+      "program": "Studio Lab",
+      "uni": "University of Colorado, Boulder",
+      "years": "2022-2024",
+      "role": "Mentor",
+      "description": "Supporting undergraduate research."
+    },
+    {
+      "year": 2018,
+      "program": "Undergraduate Research Opportunities Program",
+      "uni": "University of Utah",
+      "years": "2018-2022",
+      "role": "Mentor",
+      "description": "Supporting undergraduate research."
+    },
+    {
+      "year": 2018,
+      "program": "Journal Club: Problems in Evolutionary Anthropology",
+      "uni": "University of Utah",
+      "years": "2018-2022",
+      "role": "Organizer"
+    },
+    {
+      "year": 2018,
+      "program": "Hopi Tribe v Donald J. Trump, Utah Diné Bikéyah v Donald J. Trump, Natural Resources Defense Council v Donald J. Trump",
+      "role": "Contributor",
+      "description": "Brief Amici Curiae of Archaeological Organizations in Support of Plaintiffs."
+    }
+  ]
+}

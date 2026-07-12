@@ -1,77 +1,90 @@
-{%- set href_email = "mailto:" ~ links.email -%}
-{%- set href_githb = "https://github.com/" ~ links.github ~ "/" -%}
-{%- set href_orcid = "https://orcid.org/" ~ links.orcid -%}
-{%- set href_schlr = "https://scholar.google.com/citations?user=" ~ links.google_scholar ~ "&hl=en" -%}
-{%- set href_crmvt = "pdfs/" ~ links.cv -%}
-{%- set icon_email = '<iconify-icon icon="bi:envelope"></iconify-icon>' -%}
-{%- set icon_githb = '<iconify-icon icon="fa6-brands:github"></iconify-icon>' -%}
-{%- set icon_orcid = '<iconify-icon icon="fa6-brands:orcid"></iconify-icon>' -%}
-{%- set icon_schlr = '<iconify-icon icon="academicons:google-scholar"></iconify-icon>' -%}
-{%- set icon_crmvt = '<iconify-icon icon="academicons:cv"></iconify-icon>' -%}
+{%- import 'macros.html' as bib -%}
+
+{%- set href_email = "mailto:" ~ config.extra.email -%}
+{%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
+{%- set href_orcid = "https://orcid.org/" ~ config.extra.orcid -%}
+{%- set href_scholar = "https://scholar.google.com/citations?user=" ~ config.extra.google_scholar ~ "&hl=en" -%}
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>{{ name.full }}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="{{ meta.description }}">
-    <meta property="og:title" content="{{ name.full }}">
-    <meta property="og:description" content="{{ meta.description }}">
-    <meta property="og:url" content="{{ meta.base_url }}">
-    <meta property="og:image" content="{{ meta.base_url }}/web/{{ meta.og_image }}">
-    <link rel="stylesheet" href="web/theme.css">
-    <link rel="icon" href="web/favicon.png">
-    <script src="web/iconify-icon.min.js" defer></script>
-    <script src="web/tabset.js" defer></script>
-</head>
-
-<body>
-    <div class="page-layout">
-        <nav>
-            <div class="content-container">
+    <head>
+        <title>{{ config.extra.full_name }}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <meta name="description" content="{{ config.description }}">
+        <meta property="og:title" content="{{ config.title }}">
+        <meta property="og:description" content="{{ config.description }}">
+        <meta property="og:url" content="{{ config.base_url }}">
+        <meta property="og:image" content="{{ config.base_url }}/{{ config.extra.og_image }}">
+        <link rel="stylesheet" href="theme.css">
+        <link rel="icon" href="favicon.png">
+        <script src="tabset.js" defer></script>
+    </head>
+    <body>
+        <div class="page-layout">
+            <header class="page-header">
                 <h1>
-                    <a href="{{ meta.base_url }}">
-                        <span class="name-full">{{ name.full }}</span>
-                        <span class="name-short">{{ name.short }}</span>
+                    <a href="{{ config.base_url }}">
+                        <span class="name-full">{{ config.extra.full_name }}</span>
+                        <span class="name-short">{{ config.extra.short_name }}</span>
                     </a>
                 </h1>
                 <ul class="icons">
-                    <li><a href="{{ href_email }}" aria-label="Email">{{ icon_email }}</a></li>
-                    <li><a href="{{ href_githb }}" aria-label="GitHub">{{ icon_githb }}</a></li>
-                    <li><a href="{{ href_orcid }}" aria-label="ORCID">{{ icon_orcid }}</a></li>
-                    <li><a href="{{ href_schlr }}" aria-label="Google Scholar">{{ icon_schlr }}</a></li>
-                    <li><a href="{{ href_crmvt }}" aria-label="CV">{{ icon_crmvt }}</a></li>
+                    <li><a href="{{ href_email }}" aria-label="Email" data-tooltip="Send an email"><span
+                                  class="ph--envelope-simple-light"></span></a></li>
+                    <li><a href="{{ href_github }}" aria-label="GitHub" data-tooltip="View GitHub profile"><span
+                                  class="ph--github-logo-light"></span></a>
+                    </li>
+                    <li><a href="{{ href_orcid }}" aria-label="ORCID" data-tooltip="View ORCID profile"><span
+                                  class="la--orcid"></span></a></li>
+                    <li><a href="{{ href_scholar }}" aria-label="Google Scholar"
+                           data-tooltip="View Google Scholar profile"><span
+                                  class="ph--student-light"></span></a></li>
+                    <li><a href="cv.pdf" aria-label="CV" data-tooltip="Download CV"><span
+                                  class="custom--cv"></span></a></li>
                 </ul>
-            </div>
-        </nav>
-        <main>
-            <div class="content-container">
-                <div class="about">
-                    {% include "about.html" -%}
-                </div>
-                <div class="tabset">
-                    <div class="labels" role="tablist">
-                        <button class="label active" id="tab-publications" role="tab" aria-selected="true"
-                            aria-controls="publications" data-tab="publications">Publications</button>
-                        <button class="label" id="tab-presentations" role="tab" aria-selected="false"
-                            aria-controls="presentations" data-tab="presentations">Presentations</button>
-                        <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
-                            aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
-                    </div>
-                    <select id="tab-select" aria-label="Select bibliography">
-                        <option value="publications">Publications</option>
-                        <option value="presentations">Presentations</option>
-                        <option value="manuscripts">Manuscripts</option>
-                    </select>
-                    <div class="panels">
-                        {% include "panels.html" %}
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-</body>
+            </header>
+            <nav></nav>
+            <main>
+                <div class="">
+                    <section class="about">
+                        {{ section.content | safe }}
+                    </section>
+                    <section class="bibliography"></section>
+                    <div class="tabset">
+                        <div class="labels" role="tablist">
+                            <button class="label active" id="tab-publications" role="tab" aria-selected="true"
+                                    aria-controls="publications" data-tab="publications">Publications</button>
+                            <button class="label" id="tab-presentations" role="tab" aria-selected="false"
+                                    aria-controls="presentations" data-tab="presentations">Presentations</button>
+                            <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
+                                    aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
+                        </div>
+                        <select id="tab-select" aria-label="Select bibliography">
+                            <option value="publications">Publications</option>
+                            <option value="presentations">Presentations</option>
+                            <option value="manuscripts">Manuscripts</option>
+                        </select>
+                        <div class="panels">
+                            <div class="panel active" id="publications" role="tabpanel"
+                                 aria-labelledby="tab-publications">
+                                {{ bib::btn_download(filename="article.bib") }}
+                                {{ bib::tbl_articles() }}
+                            </div>
 
+                            <div class="panel" id="presentations" role="tabpanel" aria-labelledby="tab-presentations">
+                                {{ bib::btn_download(filename="presentation.bib") }}
+                                {{ bib::tbl_presentations() }}
+                            </div>
+
+                            <div class="panel" id="manuscripts" role="tabpanel" aria-labelledby="tab-manuscripts">
+                                {{ bib::btn_download(filename="manuscript.bib") }}
+                                {{ bib::tbl_manuscripts() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
 </html>

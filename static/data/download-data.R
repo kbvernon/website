@@ -1,27 +1,7 @@
-library(extera)
 library(httr2)
 library(jsonlite)
-library(tynding)
 
 collections <- c("article", "manuscript", "presentation")
-
-# setup directories ------------------------------------------------------
-data_dir <- "data"
-if (!dir.exists(data_dir)) {
-  dir.create(data_dir)
-}
-
-site_dir <- "_site"
-if (!dir.exists(site_dir)) {
-  dir.create(site_dir)
-}
-
-# do not run jekyll on gh pages
-writeLines("", file.path(site_dir, ".nojekyll"))
-
-# map custom domain to gh pages
-writeLines("www.kbvernon.io", file.path(site_dir, "CNAME"))
-
 
 # download and process zotero data ---------------------------------------
 download_zotero <- function(x, format) {
@@ -95,55 +75,17 @@ for (collection in collections) {
   # write json
   writeLines(
     toJSON(zotero, auto_unbox = TRUE),
-    file.path(data_dir, paste0(collection, ".json"))
+    file.path("static", "data", paste0(collection, ".json"))
   )
 
   # download and write bibtex
   writeLines(
     download_zotero(collection, "bibtex"),
-    file.path(data_dir, paste0(collection, ".bib"))
+    file.path("static", "data", paste0(collection, ".bib"))
   )
 }
 
-json_files <- file.path(data_dir, paste0(collections, ".json"))
+json_files <- file.path("static", "data", paste0(collections, ".json"))
 bibs <- lapply(json_files, read_json)
 bibs <- lapply(bibs, \(x) x[["items"]])
 bibs <- setNames(bibs, collections)
-
-# render website ---------------------------------------------------------
-tera <- new_engine("templates/*.html")
-tera$autoescape_off()
-
-metadata <- read_json("metadata.json")
-
-tera$render(
-  "index.html",
-  outfile = file.path(site_dir, "index.html"),
-  meta = metadata[["meta"]],
-  name = metadata[["name"]],
-  links = metadata[["links"]],
-  position = metadata[["position"]],
-  articles = bibs[["article"]],
-  manuscripts = bibs[["manuscript"]],
-  presentations = bibs[["presentation"]]
-)
-
-# render cv --------------------------------------------------------------
-typst_compile(
-  "templates/cv.typ",
-  output = sprintf("pdfs/%s", metadata[["links"]][["cv"]]),
-  font_path = "typst/fonts/",
-  root = "."
-)
-
-# clean up ---------------------------------------------------------------
-# remove json now that everything has compiled
-file.remove(json_files)
-
-# copy files to _site/ ---------------------------------------------------
-file.copy(
-  c("data", "pdfs", "web"),
-  to = site_dir,
-  recursive = TRUE,
-  overwrite = TRUE
-)

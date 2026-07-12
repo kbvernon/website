@@ -1,0 +1,201 @@
+{%- import 'macros.html' as bib -%}
+
+{%- set href_email = "mailto:" ~ config.extra.email -%}
+{%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
+{%- set href_orcid = "https://orcid.org/" ~ config.extra.orcid -%}
+{%- set href_scholar = "https://scholar.google.com/citations?user=" ~ config.extra.google_scholar ~ "&hl=en" -%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../theme.css">
+    </head>
+    <body>
+        <div class="cv-layout">
+            <header class="cv-header">
+                <h1><span class="name-full">{{ config.extra.full_name }}</span></h1>
+                <div class="meta">
+                    <div id="occupation">
+                        <p>{{ page.extra.job.name }}</p>
+                        <p>{{ page.extra.job.uni }}</p>
+                        <p>{{ page.extra.job.address }}</p>
+                        <p>{{ page.extra.job.city }}</p>
+                    </div>
+                    <ul class="icons">
+                        <li>
+                            <a href="{{ href_email }}">
+                                kbvernon.io<span class="icon ph--envelope-simple-light"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ href_github }}">
+                                {{ config.extra.github }}<span class="icon ph--github-logo-light"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ href_orcid }}">
+                                {{ config.extra.orcid }}<span class="icon la--orcid"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ href_scholar }}">
+                                {{ config.extra.google_scholar }}<span class="icon ph--student-light"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </header>
+            <main>
+                <section class="cv-section" id="appointments">
+                    <h2>Professional Appointments</h2>
+                    <table class="bib-table condensed">
+                        <tbody>
+                            {%- for entry in page.extra.appointments %}
+                            <tr>
+                                <td class="year">{{ entry.year }}</td>
+                                <td class="data">
+                                    <strong>{{ entry.title }}</strong><br>
+                                    <div class="details">{{ entry.affiliation | join(sep="<br>") | safe }}</div>
+                                </td>
+                            </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <section class="cv-section" id="education">
+                    <h2>Education</h2>
+                    <table class="bib-table condensed">
+                        <tbody>
+                            {%- for entry in page.extra.education %}
+                            <tr>
+                                <td class="year">{{ entry.year }}</td>
+                                <td class="data">
+                                    <strong>{{ entry.degree }}</strong> | {{ entry.institution }}
+                                </td>
+                            </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <section class="cv-section" id="publications">
+                    <h2>Peer-Reviewed Journal Articles</h2>
+                    {{ bib::tbl_articles() }}
+                </section>
+                <section class="cv-section" id="manuscripts">
+                    <h2>Manuscripts</h2>
+                    {{ bib::tbl_articles() }}
+                </section>
+                <section class="cv-section" id="grants">
+                    <h2>Grants, Fellowships, and Awards</h2>
+                    {%- set grants = load_data(path="data/grants.json") %}
+                    {%- set_global current_year = 0 %}
+                    <table class="bib-table">
+                        <tbody>
+                            {%- for grant in grants.items %}
+                            <tr>
+                                <td class="year">
+                                    {%- if grant.year and grant.year != current_year %}
+                                    {{ grant.year }}
+                                    {%- set_global current_year = grant.year %}
+                                    {%- endif %}
+                                </td>
+                                <td class="data">
+                                    <div class="title">{{ grant.title }}</div>
+                                    <div class="details ref">
+                                        {{ grant.program }} | {{ grant.funder }}
+                                    </div>
+                                    <div class="details">
+                                        PI: {{ grant.pi | join(sep=", ") }} | ${{ grant.amount | num_format }}
+                                    </div>
+                                </td>
+                            </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <section class="cv-section" id="presentations">
+                    <h2>Presentations</h2>
+                    {{ bib::tbl_presentations() }}
+                </section>
+                <section class="cv-section" id="teaching">
+                    <h2>Teaching</h2>
+                    <table class="bib-table condensed">
+                        <tbody>
+                            <tr>
+                                <td class="year"></td>
+                                <td class="data">
+                                    <div class="title">Teaching Interests</div>
+                                    {{ page.extra.teaching.interests | join(sep=", ") }}
+                                </td>
+                            </tr>
+                            {%- set classes_by_uni = page.extra.teaching.classes | group_by(attribute="uni") %}
+                            {%- for uni, classes in classes_by_uni %}
+                            <tr>
+                                <td class="year"></td>
+                                <td class="data">
+                                    <div class="title">{{ uni }}</div>
+                                    <ul class="class-list">
+                                        {%- for entry in classes %}
+                                        <li>{{ entry.class }}</li>
+                                        {%- endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <section class="cv-section" id="affiliations">
+                    <h2>Professional Affiliations</h2>
+                    <table class="bib-table condensed">
+                        <tbody>
+                            {%- for entry in page.extra.affiliations %}
+                            <tr>
+                                <td class="year">{{ entry.year }}</td>
+                                <td class="data">{{ entry.organization }}</td>
+                            </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <section class="cv-section" id="synergy">
+                    <h2>Service, Outreach, and other Activities</h2>
+                    {%- set service = load_data(path="data/service.json") %}
+                    {%- set_global current_year = 0 %}
+                    <table class="bib-table condensed">
+                        <tbody>
+                            {%- for entry in service.items %}
+                            <tr>
+                                <td class="year">
+                                    {%- if entry.year != current_year %}
+                                    {{ entry.year }}
+                                    {%- set_global current_year = entry.year %}
+                                    {%- endif %}
+                                </td>
+                                <td class="data">
+                                    <div>
+                                        <span class="title">{{ entry.program }}</span>
+                                        {%- if entry.uni %}
+                                        <span class="foo">
+                                            {{ entry.uni }} {%- if entry.years %} | {{ entry.years }}{%- endif %}
+                                        </span>
+                                        {%- endif %}
+                                    </div>
+                                    <div class="details">
+                                        {{ entry.role }}.{%- if entry.description %} {{ entry.description }}{%- endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                <section class="cv-section" id="references">
+                    <h2>References</h2>
+                    <p style="margin-top: 0.7em;"><em>Available upon request.</em></p>
+                </section>
+            </main>
+        </div>
+    </body>
+</html>
