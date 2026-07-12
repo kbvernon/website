@@ -34,12 +34,23 @@
     --bib-data-font-size: 0.9em;
 }
 
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: var(--font-sans);
     font-size: var(--font-size-body);
     line-height: 1.6;
+    width: 100%;
 }
 
 .page-layout {
@@ -294,7 +305,7 @@ section.about {
 /* responsive design */
 @media (min-width: 992px) {
     .page-layout {
-        max-width: 1000px;
+        max-width: 900px;
     }
 }
 
