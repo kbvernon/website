@@ -10,8 +10,6 @@ compile_sass = false
 build_search_index = false
 generate_sitemap = false
 
-ignored_content = [ "R/*" ]
-
 [extra]
 og_image = "green_grass_valley-meta.jpg"
 full_name = "Kenneth Blake Vernon"
