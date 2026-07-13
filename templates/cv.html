@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>{{ config.extra.full_name }} CV</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="../theme.css">
     </head>
     <body>
@@ -84,7 +86,7 @@
                 </section>
                 <section class="cv-section" id="manuscripts">
                     <h2>Manuscripts</h2>
-                    {{ bib::tbl_articles() }}
+                    {{ bib::tbl_manuscripts() }}
                 </section>
                 <section class="cv-section" id="grants">
                     <h2>Grants, Fellowships, and Awards</h2>
@@ -193,7 +195,7 @@
                 </section>
                 <section class="cv-section" id="references">
                     <h2>References</h2>
-                    <p style="margin-top: 0.7em;"><em>Available upon request.</em></p>
+                    <p id="ref-statement"><em>Available upon request.</em></p>
                 </section>
             </main>
         </div>

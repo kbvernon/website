@@ -7,27 +7,21 @@ having to add or edit entries in Zotero (mostly, anyway).
 
 ## Stack
 
--   **[Zola](https://www.getzola.org/)** — Rust-powered static site generator,
-    a simplified version of Hugo with a powerful templating engine.
--   **[just](https://github.com/casey/just)** — a Rust-powered command runner,
-    similar to `make`
+-   **[Zola](https://www.getzola.org/)** — Rust-powered static site generator.
+-   **[just](https://github.com/casey/just)** — a Rust-powered command runner.
 -   **Chrome** - headless Chrome for `--print-to-pdf`.
--   **R** - specifically `httr2` and `jsonlite`, for calling the Zotero API and
+-   **R** - specifically `httr2` and `jsonlite` for calling the Zotero API and
     serializing to JSON.
 
 ## Pipeline
 
-Running `just download` and `just build` will 
+Running `just download build` will 
 
 1.  download bibliographic data from Zotero and serialize it to JSON in 
     `static/data/*.json` using `Rscript static/data/download-data.R`,
 2.  render the website with `Zola build`, compiling `content/` with 
     `templates/`, and
 3.  render CV to pdf using `chrome --headless=new --print-to-pdf`.
-
-Use `just dev` to run a live-reloading local server.
-
-**Available commands**
 
 Run `just` with no arguments to list all recipes.
 
@@ -51,17 +45,11 @@ Available recipes:
 │   ├── _index.md  # The website
 │   ├── cv.md      # Front matter with data for CV
 ├── templates/     # Zola HTML templates and macros
-└──  static/        # Bibliographic data, CSS, JS, and other assets
+└── static/        # Bibliographic data, CSS, JS, and other assets
 ```
 
 ## Metadata
 
-Site metadata is split between two sources. `zola.toml` (`[extra]`) holds static
-configuration: personal details, social and academic profile links, and Open
-Graph metadata. Page-specific structured data (CV appointments, education,
-affiliations, teaching) lives in the front matter of the relevant `content/`
-page or in JSON files under `static/data/` (e.g. `grants.json`, `service.json`).
-
-Environment variables hold secrets and dynamic configuration used at render 
-time, primarily credentials and collection IDs for interacting with the Zotero 
-API.
+- `zola.toml` holds static configuration and bibliographic metadata,
+- the front matter of `content/cv.md` or in `static/data/*.json` has CV data, 
+- Zotero API keys stored as environment variables.

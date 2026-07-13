@@ -2,3 +2,9 @@
 /data/
 /public/
 .env
+/static/data/article.json
+/static/data/presentation.json
+/static/data/manuscript.json
+/static/data/article.bib
+/static/data/presentation.bib
+/static/data/manuscript.bib

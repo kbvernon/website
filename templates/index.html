@@ -31,26 +31,24 @@
                 </h1>
                 <ul class="icons">
                     <li><a href="{{ href_email }}" aria-label="Email" data-tooltip="Send an email"><span
-                                  class="ph--envelope-simple-light"></span></a></li>
+                                  class="icon mask ph--envelope-simple-light"></span></a></li>
                     <li><a href="{{ href_github }}" aria-label="GitHub" data-tooltip="View GitHub profile"><span
-                                  class="ph--github-logo-light"></span></a>
+                                  class="icon mask ph--github-logo-light"></span></a>
                     </li>
                     <li><a href="{{ href_orcid }}" aria-label="ORCID" data-tooltip="View ORCID profile"><span
-                                  class="la--orcid"></span></a></li>
+                                  class="icon mask la--orcid"></span></a></li>
                     <li><a href="{{ href_scholar }}" aria-label="Google Scholar"
                            data-tooltip="View Google Scholar profile"><span
-                                  class="ph--student-light"></span></a></li>
+                                  class="icon mask ph--student-light"></span></a></li>
                     <li><a href="cv.pdf" aria-label="CV" data-tooltip="Download CV"><span
-                                  class="custom--cv"></span></a></li>
+                                  class="icon custom--cv"></span></a></li>
                 </ul>
             </header>
-            <nav></nav>
             <main>
-                <div class="">
-                    <section class="about">
-                        {{ section.content | safe }}
-                    </section>
-                    <section class="bibliography"></section>
+                <section class="about">
+                    {{ section.content | safe }}
+                </section>
+                <section class="bibliography">
                     <div class="tabset">
                         <div class="labels" role="tablist">
                             <button class="label active" id="tab-publications" role="tab" aria-selected="true"
@@ -83,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </main>
         </div>
     </body>

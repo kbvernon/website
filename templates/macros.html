@@ -1,14 +1,14 @@
 {%- macro btn_download(filename) -%}
 <div class="bib-download">
     <a href="data/{{ filename }}" download>
-        <span class="icon ph--download-simple-light"></span>Download BibTeX
+        <span class="icon mask ph--download-simple-light"></span>Download BibTeX
     </a>
 </div>
 {%- endmacro -%}
 
 {%- macro author_list(ref) -%}
 <div class="details authors">
-    <span class="icon ph--users-light"></span>
+    <span class="icon mask ph--users-light"></span>
     {%- for a in ref.author %}
     {{ a.given }} {{ a.family }}{% if not loop.last %}, {% endif %}
     {%- endfor %}
@@ -17,25 +17,25 @@
 
 {%- macro btn_github(href) -%}
 <a href="{{ href }}" class="btn btn-github">
-    <span class="icon ph--github-logo-light"></span>GitHub
+    <span class="icon mask ph--github-logo-light"></span>GitHub
 </a>
 {%- endmacro -%}
 
 {%- macro btn_preprint(href) -%}
 <a href="{{ href }}" class="btn btn-preprint">
-    <span class="icon ph--file-pdf-light"></span>Preprint
+    <span class="icon mask ph--file-pdf-light"></span>Preprint
 </a>
 {%- endmacro -%}
 
 {%- macro btn_article(href) -%}
 <a href="{{ href }}" class="btn btn-article">
-    <span class="icon ph--file-text-light"></span>Article
+    <span class="icon mask ph--file-text-light"></span>Article
 </a>
 {%- endmacro -%}
 
 {%- macro btn_slides(href) -%}
 <a href="{{ href }}" class="btn btn-slides">
-    <span class="icon ph--projector-screen-light"></span>Slide
+    <span class="icon mask ph--projector-screen-light"></span>Slide
 </a>
 {%- endmacro -%}
 
