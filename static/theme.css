@@ -186,7 +186,7 @@ section.about {
     }
 }
 
-/* bibliographic tables */
+/* bibliographic lists */
 .bib-download {
     display: block;
     padding: 0 0.3em;
@@ -210,30 +210,27 @@ section.about {
     }
 }
 
-.bib-table {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    margin-top: 1.5em;
+.bib-list {
+    list-style: none;
+    margin: 1.5em 0 0;
+    padding: 0;
 
-    td {
-        vertical-align: baseline;
+    >li {
+        display: grid;
+        grid-template-columns: 4.5ch 1fr;
+        column-gap: 0.25em;
+        align-items: baseline;
         padding: 0.75em 0;
     }
 
-    td.year {
+    >li:first-child {
+        padding-top: 0;
+    }
+
+    .year {
         color: var(--color-muted);
         white-space: nowrap;
         font-size: var(--font-size-bib-data);
-        width: 4.5ch;
-    }
-
-    td.data {
-        padding-left: 0.5em;
-    }
-
-    tr:first-child td {
-        padding-top: 0;
     }
 
     .title {
@@ -460,22 +457,18 @@ section.about {
         }
     }
 
-    .bib-table {
+    .bib-list {
         margin-top: 0.7em;
 
         .link-group {
             display: none;
         }
 
-        td {
+        >li {
             padding: 0.5em 0;
         }
 
-        td.data {
-            padding-left: 0.5em;
-        }
-
-        &.condensed td {
+        &.condensed>li {
             padding-top: 0.35em;
             padding-bottom: 0.35em;
         }
@@ -549,13 +542,13 @@ header.cv-header {
         break-after: avoid;
     }
 
-    /* don't split a table row across a page break */
-    .bib-table tr {
+    /* don't split an entry across a page break */
+    .bib-list>li {
         break-inside: avoid;
     }
 
     /* keep a group's title with its first entry */
-    .bib-table .title {
+    .bib-list .title {
         break-after: avoid;
     }
 }

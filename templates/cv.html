@@ -51,147 +51,135 @@
             <main>
                 <section class="cv-section" id="appointments">
                     <h2>Professional Appointments</h2>
-                    <table class="bib-table condensed">
-                        <tbody>
-                            {%- for entry in page.extra.appointments %}
-                            <tr>
-                                <td class="year">{{ entry.year }}</td>
-                                <td class="data">
-                                    <strong>{{ entry.title }}</strong><br>
-                                    <div class="details">{{ entry.affiliation | join(sep="<br>") | safe }}</div>
-                                </td>
-                            </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="bib-list condensed">
+                        {%- for entry in page.extra.appointments %}
+                        <li>
+                            <span class="year">{{ entry.year }}</span>
+                            <div class="data">
+                                <strong>{{ entry.title }}</strong>
+                                <div class="details">{{ entry.affiliation | join(sep="<br>") | safe }}</div>
+                            </div>
+                        </li>
+                        {%- endfor %}
+                    </ul>
                 </section>
                 <section class="cv-section" id="education">
                     <h2>Education</h2>
-                    <table class="bib-table condensed">
-                        <tbody>
-                            {%- for entry in page.extra.education %}
-                            <tr>
-                                <td class="year">{{ entry.year }}</td>
-                                <td class="data">
-                                    <strong>{{ entry.degree }}</strong> | {{ entry.institution }}
-                                </td>
-                            </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="bib-list condensed">
+                        {%- for entry in page.extra.education %}
+                        <li>
+                            <span class="year">{{ entry.year }}</span>
+                            <div class="data">
+                                <strong>{{ entry.degree }}</strong> | {{ entry.institution }}
+                            </div>
+                        </li>
+                        {%- endfor %}
+                    </ul>
                 </section>
                 <section class="cv-section" id="publications">
                     <h2>Peer-Reviewed Journal Articles</h2>
-                    {{ bib::tbl_articles() }}
+                    {{ bib::list_articles() }}
                 </section>
                 <section class="cv-section" id="manuscripts">
                     <h2>Manuscripts</h2>
-                    {{ bib::tbl_manuscripts() }}
+                    {{ bib::list_manuscripts() }}
                 </section>
                 <section class="cv-section" id="grants">
                     <h2>Grants, Fellowships, and Awards</h2>
                     {%- set grants = load_data(path="data/grants.json") %}
                     {%- set_global current_year = 0 %}
-                    <table class="bib-table">
-                        <tbody>
-                            {%- for grant in grants.items %}
-                            <tr>
-                                <td class="year">
-                                    {%- if grant.year and grant.year != current_year %}
-                                    {{ grant.year }}
-                                    {%- set_global current_year = grant.year %}
-                                    {%- endif %}
-                                </td>
-                                <td class="data">
-                                    <div class="title">{{ grant.title }}</div>
-                                    <div class="details ref">
-                                        {{ grant.program }} | {{ grant.funder }}
-                                    </div>
-                                    <div class="details">
-                                        PI: {{ grant.pi | join(sep=", ") }} | ${{ grant.amount | num_format }}
-                                    </div>
-                                </td>
-                            </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="bib-list">
+                        {%- for grant in grants.items %}
+                        <li>
+                            <span class="year">
+                                {%- if grant.year and grant.year != current_year %}
+                                {{ grant.year }}
+                                {%- set_global current_year = grant.year %}
+                                {%- endif %}
+                            </span>
+                            <div class="data">
+                                <div class="title">{{ grant.title }}</div>
+                                <div class="details ref">
+                                    {{ grant.program }} | {{ grant.funder }}
+                                </div>
+                                <div class="details">
+                                    PI: {{ grant.pi | join(sep=", ") }} | ${{ grant.amount | num_format }}
+                                </div>
+                            </div>
+                        </li>
+                        {%- endfor %}
+                    </ul>
                 </section>
                 <section class="cv-section" id="presentations">
                     <h2>Presentations</h2>
-                    {{ bib::tbl_presentations() }}
+                    {{ bib::list_presentations() }}
                 </section>
                 <section class="cv-section" id="teaching">
                     <h2>Teaching</h2>
-                    <table class="bib-table condensed">
-                        <tbody>
-                            <tr>
-                                <td class="year"></td>
-                                <td class="data">
-                                    <div class="title">Teaching Interests</div>
-                                    {{ page.extra.teaching.interests | join(sep=", ") }}
-                                </td>
-                            </tr>
-                            {%- set classes_by_uni = page.extra.teaching.classes | group_by(attribute="uni") %}
-                            {%- for uni, classes in classes_by_uni %}
-                            <tr>
-                                <td class="year"></td>
-                                <td class="data">
-                                    <div class="title">{{ uni }}</div>
-                                    <ul class="class-list">
-                                        {%- for entry in classes %}
-                                        <li>{{ entry.class }}</li>
-                                        {%- endfor %}
-                                    </ul>
-                                </td>
-                            </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="bib-list condensed">
+                        <li>
+                            <span class="year"></span>
+                            <div class="data">
+                                <div class="title">Teaching Interests</div>
+                                {{ page.extra.teaching.interests | join(sep=", ") }}
+                            </div>
+                        </li>
+                        {%- set classes_by_uni = page.extra.teaching.classes | group_by(attribute="uni") %}
+                        {%- for uni, classes in classes_by_uni %}
+                        <li>
+                            <span class="year"></span>
+                            <div class="data">
+                                <div class="title">{{ uni }}</div>
+                                <ul class="class-list">
+                                    {%- for entry in classes %}
+                                    <li>{{ entry.class }}</li>
+                                    {%- endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                        {%- endfor %}
+                    </ul>
                 </section>
                 <section class="cv-section" id="affiliations">
                     <h2>Professional Affiliations</h2>
-                    <table class="bib-table condensed">
-                        <tbody>
-                            {%- for entry in page.extra.affiliations %}
-                            <tr>
-                                <td class="year">{{ entry.year }}</td>
-                                <td class="data">{{ entry.organization }}</td>
-                            </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="bib-list condensed">
+                        {%- for entry in page.extra.affiliations %}
+                        <li>
+                            <span class="year">{{ entry.year }}</span>
+                            <div class="data">{{ entry.organization }}</div>
+                        </li>
+                        {%- endfor %}
+                    </ul>
                 </section>
                 <section class="cv-section" id="synergy">
                     <h2>Service, Outreach, and other Activities</h2>
                     {%- set service = load_data(path="data/service.json") %}
                     {%- set_global current_year = 0 %}
-                    <table class="bib-table condensed">
-                        <tbody>
-                            {%- for entry in service.items %}
-                            <tr>
-                                <td class="year">
-                                    {%- if entry.year != current_year %}
-                                    {{ entry.year }}
-                                    {%- set_global current_year = entry.year %}
+                    <ul class="bib-list condensed">
+                        {%- for entry in service.items %}
+                        <li>
+                            <span class="year">
+                                {%- if entry.year != current_year %}
+                                {{ entry.year }}
+                                {%- set_global current_year = entry.year %}
+                                {%- endif %}
+                            </span>
+                            <div class="data">
+                                <div>
+                                    <span class="title">{{ entry.program }}</span>
+                                    {%- if entry.uni %}
+                                    <span>
+                                        {{ entry.uni }} {%- if entry.years %} | {{ entry.years }}{%- endif %}
+                                    </span>
                                     {%- endif %}
-                                </td>
-                                <td class="data">
-                                    <div>
-                                        <span class="title">{{ entry.program }}</span>
-                                        {%- if entry.uni %}
-                                        <span class="foo">
-                                            {{ entry.uni }} {%- if entry.years %} | {{ entry.years }}{%- endif %}
-                                        </span>
-                                        {%- endif %}
-                                    </div>
-                                    <div class="details">
-                                        {{ entry.role }}.{%- if entry.description %} {{ entry.description }}{%- endif %}
-                                    </div>
-                                </td>
-                            </tr>
-                            {%- endfor %}
-                        </tbody>
-                    </table>
+                                </div>
+                                <div class="details">
+                                    {{ entry.role }}.{%- if entry.description %} {{ entry.description }}{%- endif %}
+                                </div>
+                            </div>
+                        </li>
+                        {%- endfor %}
+                    </ul>
                 </section>
                 <section class="cv-section" id="references">
                     <h2>References</h2>
