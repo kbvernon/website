@@ -27,11 +27,16 @@
     --font-mono: "Source Code Pro", monospace;
     --font-size-body: clamp(0.9rem, 0.9rem + 0.5vw, 1.1rem);
     --font-size-h1: clamp(1.5rem, 1.2rem + 1.5vw, 2.3rem);
+    --font-size-bib-data: 0.9em;
+    --font-size-print: 11pt;
     --color-muted: #555;
     --color-border: #ccc;
     --color-ink: black;
-    --bib-meta-gap: 0.3em;
-    --font-size-bib-data: 0.9em;
+    --color-paper: white;
+    --gap-bib-meta: 0.3em;
+    --icon-gap: 0.35em;
+    --margin-page-cv: 0.8in;
+    --gap-heading-cv: 0.7em;
 }
 
 html {
@@ -139,7 +144,7 @@ section.about {
     }
 }
 
-/* bibliography */
+/* tabs */
 .tabset {
     margin-top: 2.5em;
 
@@ -186,7 +191,7 @@ section.about {
     }
 }
 
-/* bibliographic lists */
+/* bibliography */
 .bib-download {
     display: block;
     padding: 0 0.3em;
@@ -194,7 +199,7 @@ section.about {
     a {
         display: flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: var(--icon-gap);
         font-family: var(--font-mono);
         font-size: 0.9rem;
         color: var(--color-muted);
@@ -238,9 +243,17 @@ section.about {
     }
 
     .details {
-        margin-top: var(--bib-meta-gap);
+        margin-top: var(--gap-bib-meta);
         font-size: var(--font-size-bib-data);
         color: var(--color-muted);
+    }
+
+    .details.authors,
+    .details.doi {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: var(--icon-gap);
+        align-items: baseline;
     }
 
     .class-list {
@@ -275,11 +288,11 @@ section.about {
 
         .btn .icon {
             font-size: 1.3em;
-            margin-right: 0.2em;
+            margin-right: var(--icon-gap);
         }
 
         .btn:hover {
-            color: white;
+            color: var(--color-paper);
             background-color: var(--color-ink);
         }
     }
@@ -321,7 +334,7 @@ section.about {
     top: calc(100% + 0.5em);
     right: 0;
     background-color: var(--color-ink);
-    color: white;
+    color: var(--color-paper);
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 400;
@@ -357,45 +370,33 @@ section.about {
     }
 }
 
-.data span.icon {
-    margin-left: 0;
-    margin-right: 0.3em;
-}
-
 .custom--cv {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-sans);
-    font-size: 0.8em;
-    font-weight: 400;
-    letter-spacing: -0.05em;
-    color: currentColor;
-    margin: 0;
+
 }
 
 .custom--cv::before {
     content: "CV";
+    letter-spacing: -0.05em;
+    font-family: var(--font-sans);
+    font-size: 0.8em;
+    font-weight: 400;
 }
 
 .custom--doi {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: var(--font-sans);
-    font-size: 0.8em;
-    font-weight: 500;
-    letter-spacing: 0.09em;
-    color: currentColor;
-    margin: 0;
-    position: relative;
-    bottom: 1px;
-    transform: scale(0.75, 1.19);
-    transform-origin: left center;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1em;
 }
 
 .custom--doi::before {
     content: "doi";
+    letter-spacing: 0.02em;
+    font-family: var(--font-sans);
+    font-size: 0.7em;
+    font-weight: 400;
 }
 
 .la--orcid {
@@ -435,13 +436,14 @@ section.about {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='black' d='M112.6 158.43a58 58 0 1 0-57.2 0a93.83 93.83 0 0 0-50.19 38.29a6 6 0 0 0 10.05 6.56a82 82 0 0 1 137.48 0a6 6 0 0 0 10-6.56a93.83 93.83 0 0 0-50.14-38.29M38 108a46 46 0 1 1 46 46a46.06 46.06 0 0 1-46-46m211 97a6 6 0 0 1-8.3-1.74A81.8 81.8 0 0 0 172 166a6 6 0 0 1 0-12a46 46 0 1 0-17.08-88.73a6 6 0 1 1-4.46-11.14a58 58 0 0 1 50.14 104.3a93.83 93.83 0 0 1 50.19 38.29A6 6 0 0 1 249 205'/%3E%3C/svg%3E");
 }
 
+/* optical nudge; translate because vertical-align is inert on grid items */
 .ph--users-light {
-    vertical-align: -0.15em;
+    translate: 0 0.15em;
 }
 
 /* cv */
 .cv-layout {
-    margin: 0.8in;
+    margin: var(--margin-page-cv);
 
     section.cv-section {
         margin-top: 1em;
@@ -458,7 +460,7 @@ section.about {
     }
 
     .bib-list {
-        margin-top: 0.7em;
+        margin-top: var(--gap-heading-cv);
 
         .link-group {
             display: none;
@@ -475,7 +477,7 @@ section.about {
     }
 
     p#ref-statement {
-        margin-top: 0.7em;
+        margin-top: var(--gap-heading-cv);
     }
 }
 
@@ -513,7 +515,7 @@ header.cv-header {
         }
 
         ul.icons a span.icon {
-            margin-left: 0.4em;
+            margin-left: var(--icon-gap);
         }
     }
 }
@@ -521,16 +523,16 @@ header.cv-header {
 /* print to pdf */
 @page {
     size: letter;
-    margin: 0.8in;
+    margin: var(--margin-page-cv);
 }
 
 @media print {
     html {
-        font-size: 11pt;
+        font-size: var(--font-size-print);
     }
 
     body {
-        font-size: 11pt;
+        font-size: var(--font-size-print);
     }
 
     .cv-layout {
