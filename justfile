@@ -18,7 +18,7 @@ cv:
     rm -rf public/cv/
 
 # Run live serve
-dev: 
+dev:
 	zola serve --open
 
 # Download bibliographic data
