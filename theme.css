@@ -1,31 +1,6 @@
-@font-face {
-    font-family: "Noto Sans";
-    src: url("fonts/NotoSans-VariableFont_wdth,wght.ttf");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Noto Sans";
-    src: url("fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf");
-    font-weight: 100 900;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Source Code Pro";
-    src: url("fonts/SourceCodePro-VariableFont_wght.ttf");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
 :root {
-    --font-sans: "Noto Sans", sans-serif;
-    --font-mono: "Source Code Pro", monospace;
-    --font-size-body: clamp(0.9rem, 0.9rem + 0.5vw, 1.1rem);
+    --font-sans: system-ui, sans-serif;
+    --font-size-body: clamp(0.95rem, 0.95rem + 0.5vw, 1.15rem);
     --font-size-h1: clamp(1.5rem, 1.2rem + 1.5vw, 2.3rem);
     --font-size-bib-data: 0.9em;
     --font-size-print: 11pt;
@@ -34,9 +9,9 @@
     --color-ink: black;
     --color-paper: white;
     --gap-bib-meta: 0.3em;
-    --icon-gap: 0.35em;
+    --icon-gap: 0.2em;
     --margin-page-cv: 0.8in;
-    --gap-heading-cv: 0.7em;
+    --gap-heading-cv: 0.25em;
 }
 
 html {
@@ -82,7 +57,6 @@ header.page-header {
         margin: 0;
         padding: 0;
         font-size: var(--font-size-h1);
-        font-family: var(--font-mono);
     }
 
     h1 a {
@@ -122,11 +96,10 @@ header.page-header {
 /* about page */
 section.about {
     h2 {
-        margin-top: 1.5em;
+        margin-top: 1.3em;
         margin-bottom: 0;
-        font-weight: 400;
-        font-family: var(--font-mono);
         font-size: var(--font-size-body);
+        font-weight: 400;
         color: var(--color-muted);
     }
 
@@ -158,7 +131,6 @@ section.about {
 
     select {
         display: block;
-        font-family: var(--font-mono);
         font-size: 1.1rem;
         color: inherit;
         background: none;
@@ -171,15 +143,13 @@ section.about {
     .label {
         background: none;
         border: none;
-        padding: 0.5em 0.3em;
+        padding: 0.3em;
         cursor: pointer;
-        font-family: var(--font-mono);
         font-size: 1.2rem;
         text-align: left;
         color: inherit;
         border-bottom: 2px solid transparent;
         margin-bottom: -1px;
-        margin-right: 0.25em;
     }
 
     .label.active {
@@ -200,7 +170,6 @@ section.about {
         display: flex;
         align-items: center;
         gap: var(--icon-gap);
-        font-family: var(--font-mono);
         font-size: 0.9rem;
         color: var(--color-muted);
         text-decoration: none;
@@ -222,7 +191,7 @@ section.about {
 
     >li {
         display: grid;
-        grid-template-columns: 4.5ch 1fr;
+        grid-template-columns: 1fr;
         column-gap: 0.25em;
         align-items: baseline;
         padding: 0.75em 0;
@@ -236,6 +205,10 @@ section.about {
         color: var(--color-muted);
         white-space: nowrap;
         font-size: var(--font-size-bib-data);
+    }
+
+    .year:not(:empty) {
+        margin-bottom: 0.15em;
     }
 
     .title {
@@ -276,9 +249,8 @@ section.about {
         .btn {
             display: inline-flex;
             align-items: center;
-            font-family: var(--font-mono);
             font-size: 0.8em;
-            padding: 0.35rem 0.4rem 0.2rem 0.4rem;
+            padding: 0.3rem 0.6rem 0.25rem 0.4rem;
             border: 1px solid var(--color-ink);
             text-decoration: none;
             white-space: nowrap;
@@ -321,6 +293,14 @@ section.about {
     .tabset select {
         display: none;
     }
+
+    .bib-list>li {
+        grid-template-columns: 4.5ch 1fr;
+    }
+
+    .bib-list .year:not(:empty) {
+        margin-bottom: 0;
+    }
 }
 
 /* tooltips */
@@ -335,7 +315,6 @@ section.about {
     right: 0;
     background-color: var(--color-ink);
     color: var(--color-paper);
-    font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 400;
     line-height: 1.2;
@@ -374,13 +353,11 @@ section.about {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .custom--cv::before {
     content: "CV";
     letter-spacing: -0.05em;
-    font-family: var(--font-sans);
     font-size: 0.8em;
     font-weight: 400;
 }
@@ -394,7 +371,6 @@ section.about {
 .custom--doi::before {
     content: "doi";
     letter-spacing: 0.02em;
-    font-family: var(--font-sans);
     font-size: 0.7em;
     font-weight: 400;
 }
@@ -450,7 +426,6 @@ section.about {
 
         h2 {
             color: var(--color-muted);
-            font-family: var(--font-mono);
             font-size: 0.8em;
             font-weight: 300;
             text-transform: uppercase;
@@ -486,7 +461,7 @@ header.cv-header {
         margin: 0;
         padding: 0;
         font-size: var(--font-size-h1);
-        font-family: var(--font-mono);
+
     }
 
     .meta {
