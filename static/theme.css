@@ -222,7 +222,7 @@ section.about {
 
     >li {
         display: grid;
-        grid-template-columns: 4.5ch 1fr;
+        grid-template-columns: 1fr;
         column-gap: 0.25em;
         align-items: baseline;
         padding: 0.75em 0;
@@ -236,6 +236,10 @@ section.about {
         color: var(--color-muted);
         white-space: nowrap;
         font-size: var(--font-size-bib-data);
+    }
+
+    .year:not(:empty) {
+        margin-bottom: 0.15em;
     }
 
     .title {
@@ -320,6 +324,14 @@ section.about {
 
     .tabset select {
         display: none;
+    }
+
+    .bib-list>li {
+        grid-template-columns: 4.5ch 1fr;
+    }
+
+    .bib-list .year:not(:empty) {
+        margin-bottom: 0;
     }
 }
 
