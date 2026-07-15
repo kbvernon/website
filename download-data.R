@@ -3,7 +3,6 @@ library(jsonlite)
 
 collections <- c("article", "manuscript", "presentation")
 
-# download and process zotero data ---------------------------------------
 download_zotero <- function(x, format) {
   collection <- paste0("ZOTERO_", toupper(x))
 
@@ -84,8 +83,3 @@ for (collection in collections) {
     file.path("static", "data", paste0(collection, ".bib"))
   )
 }
-
-json_files <- file.path("static", "data", paste0(collections, ".json"))
-bibs <- lapply(json_files, read_json)
-bibs <- lapply(bibs, \(x) x[["items"]])
-bibs <- setNames(bibs, collections)
