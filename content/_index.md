@@ -5,7 +5,8 @@ title: Webpage
 This website collects all of my publishing output along with a list of current 
 or ongoing projects. It is presented in a way that is easy to search, providing 
 access to preprints (at least when I have them) and bibliographic data, all of 
-which can be directly downloaded.
+which can be directly downloaded. The code for building this site can be found
+at the GitHub repo [kbvernon/website](https://github.com/kbvernon/website).
 
 ## Current Position  
 [One-U Responsible AI Postdoctoral Fellow](https://sci.utah.edu/people/kenneth-vernon/) | University of Utah
