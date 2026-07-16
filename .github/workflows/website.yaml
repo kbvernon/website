@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.0
 
       - name: Setup R
         id: setup-r
@@ -31,7 +31,7 @@ jobs:
           use-public-rspm: true
 
       - name: Cache R packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: ${{ env.R_LIBS_USER }}
           key: r-${{ steps.setup-r.outputs.installed-r-version }}-${{ env.R_CACHE_VERSION }}
@@ -52,7 +52,7 @@ jobs:
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
           clean: true
           branch: gh-pages
