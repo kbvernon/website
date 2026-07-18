@@ -24,6 +24,7 @@
     --color-border: #ccc;
     --color-ink: black;
     --color-paper: white;
+    --color-text: black;
     --gap-bib-meta: 0.3em;
     --gap-icon: 0.4em;
     --gap-icon-btn: 0.2em;
@@ -126,7 +127,6 @@ section.about {
         font-weight: 600;
     }
 
-
     a {
         color: inherit;
         text-decoration: underline;
@@ -135,11 +135,30 @@ section.about {
     a:hover {
         color: var(--color-muted);
     }
+
+    #site-meta {
+        font-size: var(--font-size-bib-data);
+
+        span {
+            color: var(--color-muted);
+        }
+
+        p:first-child {
+            margin-bottom: 0.25em;
+        }
+
+        p:last-child {
+            margin-top: 0.25em;
+        }
+    }
 }
 
 /* tabs */
 .tabset {
-    margin-top: 2.5em;
+    margin-top: 1.5em;
+    margin-bottom: 3em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--color-border);
 
     .labels {
         display: none;

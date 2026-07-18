@@ -2,6 +2,7 @@
 
 {%- set href_email = "mailto:" ~ config.extra.email -%}
 {%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
+{%- set href_repo = "https://github.com/" ~ config.extra.repo ~ "/" -%}
 {%- set href_orcid = "https://orcid.org/" ~ config.extra.orcid -%}
 {%- set href_scholar = "https://scholar.google.com/citations?user=" ~ config.extra.google_scholar ~ "&hl=en" -%}
 
@@ -15,7 +16,6 @@
         <meta property="og:title" content="{{ config.title }}">
         <meta property="og:description" content="{{ config.description }}">
         <meta property="og:url" content="{{ config.base_url }}">
-        <meta property="og:image" content="{{ config.base_url }}/{{ config.extra.og_image }}">
         <link rel="stylesheet" href="theme.css">
         <link rel="icon" href="favicon.svg" type="image/svg+xml">
         <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -48,6 +48,10 @@
             <main>
                 <section class="about">
                     {{ section.content | safe }}
+                    <div id="site-meta">
+                        <p><span>Website repo:</span> <a href="{{ href_repo }}">{{ config.extra.repo }}</a></p>
+                        <p><span>Last updated:</span> {{ now() | date(format='%Y-%m-%d') }}</p>
+                    </div>
                 </section>
                 <section class="bibliography">
                     <div class="tabset">
