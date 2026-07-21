@@ -14,12 +14,12 @@ check:
 
 # Render cv to pdf with headless Chrome
 cv:
-    {{chrome}} --headless=new --print-to-pdf="{{wd}}/public/cv.pdf" --no-pdf-header-footer "{{wd}}/public/cv/index.html"
+    {{ chrome }} --headless=new --print-to-pdf="{{ wd }}/public/cv.pdf" --no-pdf-header-footer "{{ wd }}/public/cv/index.html"
     rm -rf public/cv/
 
 # Run live serve
 dev:
-	zola serve --open
+    zola serve --open
 
 # Download bibliographic data
 download:
