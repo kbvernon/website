@@ -1,12 +1,8 @@
-# The URL the site will be built for
 base_url = "https://www.kbvernon.io/"
 title = "KB Vernon's Academic Website"
 description = "A modest home for my bibliographic data."
 
-# Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
-
-# Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 generate_sitemap = false
 
