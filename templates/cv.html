@@ -1,5 +1,3 @@
-{%- import 'macros.html' as bib -%}
-
 {%- set href_email = "mailto:" ~ config.extra.email -%}
 {%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
 {%- set href_orcid = "https://orcid.org/" ~ config.extra.orcid -%}
@@ -78,11 +76,11 @@
                 </section>
                 <section class="cv-section" id="publications">
                     <h2>Peer-Reviewed Journal Articles</h2>
-                    {{ bib::list_articles() }}
+                    {{<list_articles/>}}
                 </section>
                 <section class="cv-section" id="manuscripts">
                     <h2>Manuscripts</h2>
-                    {{ bib::list_manuscripts() }}
+                    {{<list_manuscripts/>}}
                 </section>
                 <section class="cv-section" id="grants">
                     <h2>Grants, Fellowships, and Awards</h2>
@@ -112,7 +110,7 @@
                 </section>
                 <section class="cv-section" id="presentations">
                     <h2>Presentations</h2>
-                    {{ bib::list_presentations() }}
+                    {{<list_presentations/>}}
                 </section>
                 <section class="cv-section" id="teaching">
                     <h2>Teaching</h2>

@@ -1,45 +1,45 @@
-{%- macro btn_download(filename) -%}
+{% component btn_download(filename) %}
 <div class="bib-download">
     <a href="data/{{ filename }}" download>
         <span class="icon mask ph--download-simple-light"></span>Download BibTeX
     </a>
 </div>
-{%- endmacro -%}
+{% endcomponent %}
 
-{%- macro author_list(ref) -%}
+{% component author_list(ref) %}
 <div class="details authors">
     <span class="icon mask ph--users-light"></span>
     {%- for a in ref.author %}
     {{ a.given }} {{ a.family }}{% if not loop.last %}, {% endif %}
     {%- endfor %}
 </div>
-{%- endmacro -%}
+{% endcomponent %}
 
-{%- macro btn_github(href) -%}
+{% component btn_github(href) %}
 <a href="{{ href }}" class="btn btn-github">
     <span class="icon mask ph--github-logo-light"></span>GitHub
 </a>
-{%- endmacro -%}
+{% endcomponent %}
 
-{%- macro btn_preprint(href) -%}
+{% component btn_preprint(href) %}
 <a href="{{ href }}" class="btn btn-preprint">
     <span class="icon mask ph--file-pdf-light"></span>Preprint
 </a>
-{%- endmacro -%}
+{% endcomponent %}
 
-{%- macro btn_article(href) -%}
+{% component btn_article(href) %}
 <a href="{{ href }}" class="btn btn-article">
     <span class="icon mask ph--file-text-light"></span>Article
 </a>
-{%- endmacro -%}
+{% endcomponent %}
 
-{%- macro btn_slides(href) -%}
+{% component btn_slides(href) %}
 <a href="{{ href }}" class="btn btn-slides">
     <span class="icon mask ph--projector-screen-light"></span>Slide
 </a>
-{%- endmacro -%}
+{% endcomponent %}
 
-{%- macro list_articles() -%}
+{% component list_articles() %}
 {%- set articles = load_data(path="data/article.json") -%}
 {%- set_global current_year = 0 -%}
 <ul class="bib-list">
@@ -63,24 +63,28 @@
                 {%- if ref.page %}: {{ ref.page | replace(from="--", to="-") }}{%- endif %}
                 {%- if year %} ({{ year }}){%- endif %}
             </div>
-            {{ self::author_list(ref=ref) }}
+            {{
+            <author_list ref={ref} />}}
             {%- if ref.DOI %}
             <div class="details doi">
                 <span class="icon custom--doi"></span> {{ ref.DOI }}
             </div>
             {%- endif %}
             <div class="link-group">
-                {%- if ref.github %}{{ self::btn_github(href=ref.github) }}{%- endif %}
-                {%- if ref.preprint %}{{ self::btn_preprint(href=ref.preprint) }}{%- endif %}
-                {%- if ref.URL %}{{ self::btn_article(href=ref.URL) }}{%- endif %}
+                {%- if ref.github %}{{
+                <btn_github href={ref.github} />}}{%- endif %}
+                {%- if ref.preprint %}{{
+                <btn_preprint href={ref.preprint} />}}{%- endif %}
+                {%- if ref.URL %}{{
+                <btn_article href={ref.URL} />}}{%- endif %}
             </div>
         </div>
     </li>
     {%- endfor %}
 </ul>
-{% endmacro %}
+{% endcomponent %}
 
-{%- macro list_presentations() -%}
+{% component list_presentations() %}
 {%- set presentations = load_data(path="data/presentation.json") -%}
 {%- set_global current_year = 0 -%}
 <ul class="bib-list">
@@ -96,18 +100,21 @@
                 {%- if ref["event-title"] %}{{ ref["event-title"] }}{%- endif %}
                 {%- if ref["publisher-place"] %}, {{ ref["publisher-place"] }}{%- endif %}.
             </div>
-            {{ self::author_list(ref=ref) }}
+            {{
+            <author_list ref={ref} />}}
             <div class="link-group">
-                {%- if ref.github %}{{ self::btn_github(href=ref.github) }}{%- endif %}
-                {%- if ref.URL %}{{ self::btn_slides(href=ref.URL) }}{%- endif %}
+                {%- if ref.github %}{{
+                <btn_github href={ref.github} />}}{%- endif %}
+                {%- if ref.URL %}{{
+                <btn_slides href={ref.URL} />}}{%- endif %}
             </div>
         </div>
     </li>
     {%- endfor %}
 </ul>
-{% endmacro %}
+{% endcomponent %}
 
-{%- macro list_manuscripts() -%}
+{% component list_manuscripts() %}
 {%- set manuscripts = load_data(path="data/manuscript.json") -%}
 <ul class="bib-list">
     {%- for ref in manuscripts.items %}
@@ -119,13 +126,16 @@
                 {%- if ref["container-title"] %}<span>{{ ref["container-title"] }}</span>{%- endif %}
                 {%- if ref.status %} ({{ ref.status }}){%- endif %}
             </div>
-            {{ self::author_list(ref=ref) }}
+            {{
+            <author_list ref={ref} />}}
             <div class="link-group">
-                {%- if ref.github %}{{ self::btn_github(href=ref.github) }}{%- endif %}
-                {%- if ref.preprint %}{{ self::btn_preprint(href=ref.preprint) }}{%- endif %}
+                {%- if ref.github %}{{
+                <btn_github href={ref.github} />}}{%- endif %}
+                {%- if ref.preprint %}{{
+                <btn_preprint href={ref.preprint} />}}{%- endif %}
             </div>
         </div>
     </li>
     {%- endfor %}
 </ul>
-{% endmacro %}
+{% endcomponent %}

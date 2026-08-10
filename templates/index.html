@@ -1,5 +1,3 @@
-{%- import 'macros.html' as bib -%}
-
 {%- set href_email = "mailto:" ~ config.extra.email -%}
 {%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
 {%- set href_repo = "https://github.com/" ~ config.extra.repo ~ "/" -%}
@@ -71,18 +69,18 @@
                         <div class="panels">
                             <div class="panel active" id="publications" role="tabpanel"
                                  aria-labelledby="tab-publications">
-                                {{ bib::btn_download(filename="article.bib") }}
-                                {{ bib::list_articles() }}
+                                {{<btn_download filename="article.bib"/>}}
+                                {{<list_articles/>}}
                             </div>
 
                             <div class="panel" id="presentations" role="tabpanel" aria-labelledby="tab-presentations">
-                                {{ bib::btn_download(filename="presentation.bib") }}
-                                {{ bib::list_presentations() }}
+                                {{<btn_download filename="presentation.bib"/>}}
+                                {{<list_presentations/>}}
                             </div>
 
                             <div class="panel" id="manuscripts" role="tabpanel" aria-labelledby="tab-manuscripts">
-                                {{ bib::btn_download(filename="manuscript.bib") }}
-                                {{ bib::list_manuscripts() }}
+                                {{<btn_download filename="manuscript.bib"/>}}
+                                {{<list_manuscripts/>}}
                             </div>
                         </div>
                     </div>
