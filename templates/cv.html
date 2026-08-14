@@ -24,7 +24,12 @@
                     <ul class="icons">
                         <li>
                             <a href="{{ href_email }}">
-                                kbvernon.io<span class="icon mask ph--envelope-simple-light"></span>
+                                {{ config.extra.email }}<span class="icon mask ph--envelope-simple-light"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ config.base_url }}">
+                                {{ config.extra.site }}<span class="icon mask ph--link-light"></span>
                             </a>
                         </li>
                         <li>
@@ -76,11 +81,13 @@
                 </section>
                 <section class="cv-section" id="publications">
                     <h2>Peer-Reviewed Journal Articles</h2>
-                    {{<list_articles/>}}
+                    {{
+                    <list_articles />}}
                 </section>
                 <section class="cv-section" id="manuscripts">
                     <h2>Manuscripts</h2>
-                    {{<list_manuscripts/>}}
+                    {{
+                    <list_manuscripts />}}
                 </section>
                 <section class="cv-section" id="grants">
                     <h2>Grants, Fellowships, and Awards</h2>
@@ -110,7 +117,8 @@
                 </section>
                 <section class="cv-section" id="presentations">
                     <h2>Presentations</h2>
-                    {{<list_presentations/>}}
+                    {{
+                    <list_presentations />}}
                 </section>
                 <section class="cv-section" id="teaching">
                     <h2>Teaching</h2>
