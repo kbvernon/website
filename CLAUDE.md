@@ -45,8 +45,13 @@ Available recipes:
 └── static/        # Bibliographic data, CSS, JS, and other assets
 ```
 
-## Metadata
+## Commits
 
-- `zola.toml` holds static configuration and bibliographic metadata,
-- the front matter of `content/cv.md` or in `static/data/*.json` has CV data, 
-- Zotero API keys stored as environment variables.
+This repo is a little awkward for conventional commits, so I will use these:
+
+-   `fix:` — bug fixes
+-   `chore:` — dependencies, CI, tooling, repo maintenance
+-   `pdf:` — rendered pdfs
+-   `content:` — site and cv content
+-   `style:` — site and cv formatting
+
