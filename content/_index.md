@@ -18,7 +18,7 @@ are the specific questions that really animate me these days:
 3. **Demographic interpolation**: how do we estimate population size without a 
    census?
 4. **Land-use dynamics and biodiversity**: how does history shape nature's 
-   response to people leaving rural areas for cities?
+   response to urbanization?
 
 In my spare time, I also contribute to several FOSS projects in the R community,
 especially [extendr](https://extendr.rs/).
