@@ -13,6 +13,25 @@
       "amount": 4000
     },
     {
+      "year": 2025,
+      "title": "One U Responsible AI Postdoctoral Fellow",
+      "program": "Scientific Computing and Imaging Institute",
+      "funder": "University of Utah",
+      "pi": [
+        "Simon C. Brewer",
+        "Brian F. Codding"
+      ]
+    },
+    {
+      "year": 2022,
+      "title": "Postdoctoral Associate",
+      "program": "Center for Collaborative Synthesis in Archaeology",
+      "funder": "National Science Foundation",
+      "pi": [
+        "Scott Ortman"
+      ]
+    },
+    {
       "year": 2022,
       "title": "Archaeological Survey of Cottonwood Wash, San Rafael Desert, Emery County, Utah",
       "program": "Cooperative Agreement (L20AC00267)",
@@ -72,7 +91,7 @@
       "funder": "University of Utah Global Change and Sustainability Center",
       "pi": [
         "Brian F. Codding",
-        "Simon Brewer"
+        "Simon C. Brewer"
       ],
       "amount": 20000
     },

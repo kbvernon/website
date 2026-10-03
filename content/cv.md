@@ -16,7 +16,7 @@ extra:
         - "School of Environment, Society, and Sustainability"
         - "University of Utah"
     - year: "2022"
-      title: "Post-Doctoral Associate"
+      title: "Postdoctoral Associate"
       affiliation:
         - "Center for Collaborative Synthesis in Archaeology, CU Boulder"
     - year: "2018"
