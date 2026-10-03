@@ -108,7 +108,8 @@
                                     {{ grant.program }} | {{ grant.funder }}
                                 </div>
                                 <div class="details">
-                                    PI: {{ grant.pi | join(sep=", ") }} | ${{ grant.amount | num_format }}
+                                    PI: {{ grant.pi | join(sep=", ") }}
+                                    {%- if grant.amount %} | ${{ grant.amount | num_format }}{% endif %}
                                 </div>
                             </div>
                         </li>
