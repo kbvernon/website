@@ -24,5 +24,5 @@ document.getElementById('tab-select').addEventListener('change', function () {
 
 if (location.hash) activateTab(location.hash.slice(1), false);
 window.addEventListener('popstate', () => {
-    activateTab(location.hash.slice(1) || 'publications', false);
+    activateTab(location.hash.slice(1) || 'about', false);
 });

@@ -43,31 +43,35 @@
                                   class="icon custom--cv"></span></a></li>
                 </ul>
             </header>
+            <div id="site-meta">
+                <p>Last updated: {{ now() | date(format='%Y-%m-%d') }}</p>
+                <p>Website repo: <a href="{{ href_repo }}">{{ config.extra.repo }}</a></p>
+            </div>
             <main>
-                <section class="about">
-                    {{ section.content | safe }}
-                    <div id="site-meta">
-                        <p><span>Website repo:</span> <a href="{{ href_repo }}">{{ config.extra.repo }}</a></p>
-                        <p><span>Last updated:</span> {{ now() | date(format='%Y-%m-%d') }}</p>
-                    </div>
-                </section>
-                <section class="bibliography">
+                <section>
                     <div class="tabset">
                         <div class="labels" role="tablist">
-                            <button class="label active" id="tab-publications" role="tab" aria-selected="true"
+                            <button class="label active" id="tab-about" role="tab" aria-selected="true"
+                                    aria-controls="about" data-tab="about">About</button>
+                            <button class="label" id="tab-publications" role="tab" aria-selected="false"
                                     aria-controls="publications" data-tab="publications">Publications</button>
                             <button class="label" id="tab-presentations" role="tab" aria-selected="false"
                                     aria-controls="presentations" data-tab="presentations">Presentations</button>
                             <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
                                     aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
                         </div>
-                        <select id="tab-select" aria-label="Select bibliography">
+                        <select id="tab-select" aria-label="Select section">
+                            <option value="about">About</option>
                             <option value="publications">Publications</option>
                             <option value="presentations">Presentations</option>
                             <option value="manuscripts">Manuscripts</option>
                         </select>
                         <div class="panels">
-                            <div class="panel active" id="publications" role="tabpanel"
+                            <div class="panel active" id="about" role="tabpanel" aria-labelledby="tab-about">
+                                {{ section.content | safe }}
+                            </div>
+
+                            <div class="panel" id="publications" role="tabpanel"
                                  aria-labelledby="tab-publications">
                                 {{<btn_download filename="article.bib"/>}}
                                 {{<list_articles/>}}
