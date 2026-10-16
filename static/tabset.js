@@ -11,7 +11,7 @@ function activateTab(id, push) {
     btn.setAttribute('aria-selected', 'true');
     panel.classList.add('active');
     document.getElementById('tab-select').value = id;
-    if (push) history.pushState(null, '', '#' + id);
+    if (push) history.pushState(null, '', id === 'about' ? location.pathname : '#' + id);
 }
 
 document.querySelectorAll('.tabset .label').forEach(btn => {
