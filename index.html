@@ -37,9 +37,32 @@
                                   class="icon custom--cv"></span></a></li>
                 </ul>
             </header>
+            <div id="site-meta">
+                <p>Last updated: 2026-10-16</p>
+                <p>Website repo: <a href="https://github.com/kbvernon/website/">kbvernon/website</a></p>
+            </div>
             <main>
-                <section class="about">
-                    <h2 id="current-position">Current Position</h2>
+                <section>
+                    <div class="tabset">
+                        <div class="labels" role="tablist">
+                            <button class="label active" id="tab-about" role="tab" aria-selected="true"
+                                    aria-controls="about" data-tab="about">About</button>
+                            <button class="label" id="tab-publications" role="tab" aria-selected="false"
+                                    aria-controls="publications" data-tab="publications">Publications</button>
+                            <button class="label" id="tab-presentations" role="tab" aria-selected="false"
+                                    aria-controls="presentations" data-tab="presentations">Presentations</button>
+                            <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
+                                    aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
+                        </div>
+                        <select id="tab-select" aria-label="Select section">
+                            <option value="about">About</option>
+                            <option value="publications">Publications</option>
+                            <option value="presentations">Presentations</option>
+                            <option value="manuscripts">Manuscripts</option>
+                        </select>
+                        <div class="panels">
+                            <div class="panel active" id="about" role="tabpanel" aria-labelledby="tab-about">
+                                <h2 id="current-position">Current Position</h2>
 <p><a rel="external" href="https://sci.utah.edu/people/kenneth-vernon/">One-U Responsible AI Postdoctoral Fellow</a> | University of Utah</p>
 <h2 id="research-interests">Research Interests</h2>
 <p>Broadly speaking, my research focuses on the ecology of human behavior, but here
@@ -59,28 +82,9 @@ response to urbanization?</li>
 <p>In my spare time, I also contribute to several FOSS projects in the R community,
 especially <a rel="external" href="https://extendr.rs/">extendr</a>.</p>
 
-                    <div id="site-meta">
-                        <p><span>Website repo:</span> <a href="https://github.com/kbvernon/website/">kbvernon/website</a></p>
-                        <p><span>Last updated:</span> 2026-10-03</p>
-                    </div>
-                </section>
-                <section class="bibliography">
-                    <div class="tabset">
-                        <div class="labels" role="tablist">
-                            <button class="label active" id="tab-publications" role="tab" aria-selected="true"
-                                    aria-controls="publications" data-tab="publications">Publications</button>
-                            <button class="label" id="tab-presentations" role="tab" aria-selected="false"
-                                    aria-controls="presentations" data-tab="presentations">Presentations</button>
-                            <button class="label" id="tab-manuscripts" role="tab" aria-selected="false"
-                                    aria-controls="manuscripts" data-tab="manuscripts">Manuscripts</button>
-                        </div>
-                        <select id="tab-select" aria-label="Select bibliography">
-                            <option value="publications">Publications</option>
-                            <option value="presentations">Presentations</option>
-                            <option value="manuscripts">Manuscripts</option>
-                        </select>
-                        <div class="panels">
-                            <div class="panel active" id="publications" role="tabpanel"
+                            </div>
+
+                            <div class="panel" id="publications" role="tabpanel"
                                  aria-labelledby="tab-publications">
                                 
 <div class="bib-download">
