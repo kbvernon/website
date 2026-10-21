@@ -1,0 +1,63 @@
+{%- set href_email = "mailto:" ~ config.extra.email -%}
+{%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
+{%- set href_repo = "https://github.com/" ~ config.extra.repo ~ "/" -%}
+{%- set href_orcid = "https://orcid.org/" ~ config.extra.orcid -%}
+{%- set href_scholar = "https://scholar.google.com/citations?user=" ~ config.extra.google_scholar ~ "&hl=en" -%}
+{%- set nav = [["About", "/"], ["Papers", "/papers/"], ["Talks", "/talks/"], ["Drafts", "/drafts/"]] -%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ config.extra.short_name }}{% block subtitle %}{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <meta name="description" content="{{ config.description }}">
+        <meta property="og:title" content="{{ config.title }}">
+        <meta property="og:description" content="{{ config.description }}">
+        <meta property="og:url" content="{{ current_url }}">
+        <link rel="preload" href="/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="/theme.css">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="/favicon.ico" sizes="32x32">
+    </head>
+    <body>
+        <div class="page-layout">
+            <header class="page-header">
+                <h1>
+                    <a href="/">
+                        <span class="name-full">{{ config.extra.full_name }}</span>
+                        <span class="name-short">{{ config.extra.short_name }}</span>
+                    </a>
+                </h1>
+                <ul class="icons">
+                    <li><a href="{{ href_email }}" aria-label="Email" data-tooltip="Send an email"><span
+                                  class="icon mask ph--envelope-simple-light"></span></a></li>
+                    <li><a href="{{ href_github }}" aria-label="GitHub" data-tooltip="View GitHub profile"><span
+                                  class="icon mask ph--github-logo-light"></span></a>
+                    </li>
+                    <li><a href="{{ href_orcid }}" aria-label="ORCID" data-tooltip="View ORCID profile"><span
+                                  class="icon mask la--orcid"></span></a></li>
+                    <li><a href="{{ href_scholar }}" aria-label="Google Scholar"
+                           data-tooltip="View Google Scholar profile"><span
+                                  class="icon mask ph--student-light"></span></a></li>
+                    <li><a href="/cv.pdf" aria-label="CV" data-tooltip="Download CV"><span
+                                  class="icon custom--cv"></span></a></li>
+                </ul>
+                <nav class="site-nav">
+                    {%- for item in nav %}
+                    <a href="{{ item[1] }}" {% if current_path == item[1] %} aria-current="page"
+                       {% endif %}>{{ item[0] }}</a>
+                    {%- endfor %}
+                </nav>
+            </header>
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+            <footer id="site-meta">
+                <p>Built with <a href="https://github.com/getzola/zola">Zola</a>.</p>
+                <p>Last updated: {{ now() | date(format='%Y-%m-%d') }}.</p>
+                <p>GitHub repo: <a href="{{ href_repo }}">{{ config.extra.repo }}</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,9 +1,7 @@
 {% component btn_download(filename) %}
-<div class="bib-download">
-    <a href="data/{{ filename }}" download>
-        <span class="icon mask ph--download-simple-light"></span>Download BibTeX
-    </a>
-</div>
+<a href="/data/{{ filename }}" class="bib-download" aria-label="Download BibTeX" download>
+    <span class="icon mask ph--download-simple-light"></span><span class="label">BibTeX</span>
+</a>
 {% endcomponent %}
 
 {% component author_list(ref) %}
@@ -114,12 +112,12 @@
 </ul>
 {% endcomponent %}
 
-{% component list_manuscripts() %}
-{%- set manuscripts = load_data(path="data/manuscript.json") -%}
+{% component list_drafts() %}
+{%- set drafts = load_data(path="data/manuscript.json") -%}
 <ul class="bib-list">
-    {%- for ref in manuscripts.items %}
+    {%- for ref in drafts.items %}
     <li>
-        <span class="year"></span>
+        <span class="year">{% if loop.first %}{{ now() | date(format='%Y') }}{% endif %}</span>
         <div class="data">
             <div class="title">{{ ref.title }}</div>
             <div class="details ref">

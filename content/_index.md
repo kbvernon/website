@@ -3,7 +3,7 @@ title: Webpage
 ---
 
 ## Current Position  
-[One-U Responsible AI Postdoctoral Fellow](https://sci.utah.edu/people/kenneth-vernon/) | University of Utah
+[One-U Responsible AI Postdoctoral Fellow](https://sci.utah.edu/people/kenneth-vernon/) · University of Utah
 
 ## Research Interests
 Broadly speaking, my research focuses on the ecology of human behavior, but here 
