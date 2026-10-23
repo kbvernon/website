@@ -8,7 +8,7 @@
     {{<btn_download filename={page.extra.bib}/>}}
 </div>
 {% if page.slug == "papers" %}{{<list_articles/>}}
-{%- elif page.slug == "talks" %}{{<list_presentations/>}}
+{%- elif page.slug == "talks" %}{{<list_talks/>}}
 {%- elif page.slug == "drafts" %}{{<list_drafts/>}}
 {%- endif %}
 {% endblock %}
