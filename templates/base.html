@@ -1,9 +1,8 @@
-{%- set href_email = "mailto:" ~ config.extra.email -%}
 {%- set href_github = "https://github.com/" ~ config.extra.github ~ "/" -%}
 {%- set href_repo = "https://github.com/" ~ config.extra.repo ~ "/" -%}
 {%- set href_orcid = "https://orcid.org/" ~ config.extra.orcid -%}
 {%- set href_scholar = "https://scholar.google.com/citations?user=" ~ config.extra.google_scholar ~ "&hl=en" -%}
-{%- set nav = [["About", "/"], ["Papers", "/papers/"], ["Talks", "/talks/"], ["Drafts", "/drafts/"]] -%}
+{%- set nav = [["Papers", "/papers/"], ["Talks", "/talks/"], ["Drafts", "/drafts/"]] -%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +29,6 @@
                     </a>
                 </h1>
                 <ul class="icons">
-                    <li><a href="{{ href_email }}" aria-label="Email" data-tooltip="Send an email"><span
-                                  class="icon mask ph--envelope-simple-light"></span></a></li>
                     <li><a href="{{ href_github }}" aria-label="GitHub" data-tooltip="View GitHub profile"><span
                                   class="icon mask ph--github-logo-light"></span></a>
                     </li>
@@ -43,8 +40,7 @@
                     <li><a href="/cv.pdf" aria-label="CV" data-tooltip="Download CV"><span
                                   class="icon custom--cv"></span></a></li>
                 </ul>
-                <nav class="site-nav">
-                    {%- for item in nav %}
+                <nav class="site-nav">                    {%- for item in nav %}
                     <a href="{{ item[1] }}" {% if current_path == item[1] %} aria-current="page"
                        {% endif %}>{{ item[0] }}</a>
                     {%- endfor %}
