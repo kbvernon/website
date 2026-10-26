@@ -1,57 +1,66 @@
 library(httr2)
 library(jsonlite)
 
-collections <- c("article", "manuscript", "presentation")
+collections <- c("papers", "drafts", "talks")
 
-download_zotero <- function(x, format) {
-  collection <- paste0("ZOTERO_", toupper(x))
-
-  zotero_endpoint <- req_url_path_append(
-    request("https://api.zotero.org"),
-    "users",
-    Sys.getenv("ZOTERO_ID"),
-    "collections",
-    Sys.getenv(collection),
-    "items"
-  )
-
-  zotero_request <- req_url_query(
-    zotero_endpoint,
-    key = Sys.getenv("ZOTERO_KEY"),
-    itemType = "-note",
-    format = format,
-    sort = "date",
-    direction = "desc",
-    limit = 99L
-  )
-
-  zotero_response <- req_perform(zotero_request)
-
-  resp_body_string(zotero_response)
+zotero_request <- function(...) {
+  request("https://api.zotero.org") |>
+    req_headers(
+      "Zotero-API-Key" = Sys.getenv("ZOTERO_KEY"),
+      "Zotero-API-Version" = "3"
+    ) |>
+    req_retry(max_tries = 3) |>
+    req_url_path_append("users", Sys.getenv("ZOTERO_ID"), ...)
 }
 
 for (collection in collections) {
+  key <- Sys.getenv(paste0("ZOTERO_", toupper(collection)))
+  top <- zotero_request("collections", key, "items", "top") |>
+    req_url_query(
+      itemType = "-note",
+      sort = "date",
+      direction = "desc",
+      limit = 99L
+    )
+
   # download csl json
-  zotero <- parse_json(download_zotero(collection, "csljson"))
+  zotero <- top |>
+    req_url_query(format = "csljson") |>
+    req_perform() |>
+    resp_body_json()
   items <- zotero[["items"]]
 
-  # unnest note field
+  # extract github and status from note field
   for (i in seq_along(items)) {
-    item <- items[[i]]
-    note <- item[["note"]]
-    if (!is.null(note)) {
-      lines <- gsub("\\\\", "", strsplit(note, "\n")[[1]])
-      for (line in lines) {
-        key <- sub(":.*", "", line)
-        value <- sub(".*: ", "", line)
-        item[[key]] <- value
-      }
+    note <- gsub("\\\\", "", items[[i]][["note"]] %||% "")
+    for (field in c("github", "status")) {
+      pattern <- paste0("(?<=", field, ": )[^\r\n]+")
+      value <- regmatches(note, regexpr(pattern, note, perl = TRUE))
+      if (length(value)) items[[i]][[field]] <- value
     }
-    items[[i]] <- item
   }
 
-  # inject year into manuscript items
-  if (collection == "manuscript") {
+  # download pdf attachments
+  folder <- file.path("static", collection)
+  unlink(folder, recursive = TRUE)
+  dir.create(folder)
+  ids <- vapply(items, \(x) sub(".*/", "", x[["id"]]), character(1))
+  attachments <- zotero_request("collections", key, "items") |>
+    req_url_query(itemType = "attachment", format = "json", limit = 99L) |>
+    req_perform() |>
+    resp_body_json()
+  for (attachment in attachments) {
+    a <- attachment[["data"]]
+    if (identical(a[["contentType"]], "application/pdf")) {
+      zotero_request("items", a[["key"]], "file") |>
+        req_perform(path = file.path(folder, a[["filename"]]))
+      i <- match(a[["parentItem"]], ids)
+      items[[i]][["pdf"]] <- a[["filename"]]
+    }
+  }
+
+  # inject year into draft items
+  if (collection == "drafts") {
     for (i in seq_along(items)) {
       year <- as.integer(format(Sys.Date(), "%Y"))
       items[[i]][["issued"]][["date-parts"]][[1]][[1]] <- year
@@ -59,7 +68,7 @@ for (collection in collections) {
   }
 
   # zotero api sort is not fully deterministic, so do additional sort
-  if (collection == "manuscript") {
+  if (collection == "drafts") {
     status <- vapply(items, \(x) x[["status"]] %||% "", character(1))
     title <- vapply(items, \(x) x[["title"]] %||% "", character(1))
     idx <- order(-xtfrm(status), title)
@@ -78,8 +87,7 @@ for (collection in collections) {
   )
 
   # download and write bibtex
-  writeLines(
-    download_zotero(collection, "bibtex"),
-    file.path("static", "data", paste0(collection, ".bib"))
-  )
+  top |>
+    req_url_query(format = "bibtex") |>
+    req_perform(path = file.path("static", "data", paste0(collection, ".bib")))
 }
