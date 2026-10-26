@@ -15,9 +15,9 @@ jobs:
       CHROME_BIN: google-chrome
       ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
       ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
-      ZOTERO_ARTICLE: ${{ secrets.ZOTERO_ARTICLE }}
-      ZOTERO_MANUSCRIPT: ${{ secrets.ZOTERO_MANUSCRIPT }}
-      ZOTERO_PRESENTATION: ${{ secrets.ZOTERO_PRESENTATION }}
+      ZOTERO_PAPERS: ${{ secrets.ZOTERO_PAPERS }}
+      ZOTERO_DRAFTS: ${{ secrets.ZOTERO_DRAFTS }}
+      ZOTERO_TALKS: ${{ secrets.ZOTERO_TALKS }}
 
     steps:
       - name: Checkout
