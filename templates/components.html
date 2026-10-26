@@ -20,7 +20,7 @@
 {% endcomponent %}
 
 {% component btn_preprint(href) %}
-<a href="{{ href }}" class="btn btn-preprint">
+<a href="{{ href }}" class="btn btn-preprint" target="_blank" aria-label="Preprint (opens in new tab)">
     <span class="icon mask ph--file-pdf-light"></span>Preprint
 </a>
 {% endcomponent %}
@@ -32,7 +32,7 @@
 {% endcomponent %}
 
 {% component btn_slides(href) %}
-<a href="{{ href }}" class="btn btn-slides">
+<a href="{{ href }}" class="btn btn-slides" target="_blank" aria-label="Slide (opens in new tab)">
     <span class="icon mask ph--projector-screen-light"></span>Slide
 </a>
 {% endcomponent %}
