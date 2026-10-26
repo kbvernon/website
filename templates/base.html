@@ -40,8 +40,9 @@
                     <li><a href="/cv.pdf" aria-label="CV" data-tooltip="Download CV"><span
                                   class="icon custom--cv"></span></a></li>
                 </ul>
-                <nav class="site-nav">                    {%- for item in nav %}
-                    <a href="{{ item[1] }}" {% if current_path == item[1] %} aria-current="page"
+                <nav class="site-nav">
+                    {%- for item in nav %}
+                    <a href="{{ item[1] }}" data-text="{{ item[0] }}" {% if current_path == item[1] %} aria-current="page"
                        {% endif %}>{{ item[0] }}</a>
                     {%- endfor %}
                 </nav>
