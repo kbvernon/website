@@ -1,16 +1,7 @@
-{% component btn_download(filename) %}
+{% component download(filename) %}
 <a href="/data/{{ filename }}" class="bib-download" aria-label="Download BibTeX" download>
     <span class="icon mask ph--download-simple-light"></span><span class="label">BibTeX</span>
 </a>
-{% endcomponent %}
-
-{% component author_list(ref) %}
-<div class="details authors">
-    <span class="icon mask ph--users-light"></span>
-    {%- for a in ref.author %}
-    {{ a.given }} {{ a.family }}{% if not loop.last %}, {% endif %}
-    {%- endfor %}
-</div>
 {% endcomponent %}
 
 {% component btn_github(href) %}
@@ -37,32 +28,42 @@
 </a>
 {% endcomponent %}
 
-{% component list_articles() %}
-{%- set articles = load_data(path="data/papers.json") -%}
+{% component bib(kind) %}
+{%- set data = load_data(path="data/" ~ kind ~ ".json") -%}
 {%- set_global current_year = 0 -%}
 <ul class="bib-list">
-    {%- for ref in articles.items %}
+    {%- for ref in data.items %}
+    {%- if kind == "drafts" %}
+    {%- set year = now() | date(format='%Y') %}
+    {%- else %}
     {%- set year = ref.issued["date-parts"] | first | first %}
+    {%- endif %}
     <li>
         <span class="year">
-            {%- if year != current_year %}
-            {{ year }}
-            {%- set_global current_year = year %}
-            {%- endif %}
+            {%- if year != current_year %}{{ year }}{%- set_global current_year = year %}{%- endif %}
         </span>
         <div class="data">
             <div class="title">{{ ref.title }}</div>
             <div class="details ref">
-                {%- if ref["container-title"] %}
+                {%- if kind == "papers" %}
                 <span>{{ ref["container-title"] }}</span>
-                {%- endif %}
                 {%- if ref.volume %} {{ ref.volume }}{%- endif %}
                 {%- if ref.issue %} ({{ ref.issue }}){%- endif %}
                 {%- if ref.page %}: {{ ref.page | replace(from="--", to="-") }}{%- endif %}
                 {%- if year %} ({{ year }}){%- endif %}
+                {%- elif kind == "talks" %}
+                {{ ref["event-title"] }}
+                {%- if ref["publisher-place"] %}, {{ ref["publisher-place"] }}{%- endif %}.
+                {%- else %}
+                {%- if ref.status %}({{ ref.status }}){%- endif %}
+                {%- endif %}
             </div>
-            {{
-            <author_list ref={ref} />}}
+            <div class="details authors">
+                <span class="icon mask ph--users-light"></span>
+                {%- for a in ref.author %}
+                {{ a.given }} {{ a.family }}{% if not loop.last %}, {% endif %}
+                {%- endfor %}
+            </div>
             {%- if ref.DOI %}
             <div class="details doi">
                 <span class="icon custom--doi"></span> {{ ref.DOI }}
@@ -71,67 +72,16 @@
             <div class="link-group">
                 {%- if ref.github %}{{
                 <btn_github href={ref.github} />}}{%- endif %}
+                {%- if kind == "talks" %}
+                {%- if ref.pdf %}{{
+                <btn_slides href={ref.pdf} />}}{%- elif ref.URL %}{{
+                <btn_slides href={ref.URL} />}}{%- endif %}
+                {%- else %}
                 {%- if ref.pdf %}{{
                 <btn_preprint href={ref.pdf} />}}{%- endif %}
                 {%- if ref.URL %}{{
                 <btn_article href={ref.URL} />}}{%- endif %}
-            </div>
-        </div>
-    </li>
-    {%- endfor %}
-</ul>
-{% endcomponent %}
-
-{% component list_talks() %}
-{%- set presentations = load_data(path="data/talks.json") -%}
-{%- set_global current_year = 0 -%}
-<ul class="bib-list">
-    {%- for ref in presentations.items %}
-    {%- set year = ref.issued["date-parts"] | first | first %}
-    <li>
-        <span class="year">
-            {%- if year != current_year %}{{ year }}{%- set_global current_year = year %}{%- endif %}
-        </span>
-        <div class="data">
-            <div class="title">{{ ref.title }}</div>
-            <div class="details ref">
-                {%- if ref["event-title"] %}{{ ref["event-title"] }}{%- endif %}
-                {%- if ref["publisher-place"] %}, {{ ref["publisher-place"] }}{%- endif %}.
-            </div>
-            {{
-            <author_list ref={ref} />}}
-            <div class="link-group">
-                {%- if ref.github %}{{
-                <btn_github href={ref.github} />}}{%- endif %}
-                {%- if ref.pdf %}{{
-                <btn_slides href={ref.pdf} />}}{%- elif ref.URL %}{{
-                <btn_slides href={ref.URL} />}}{%- endif %}
-            </div>
-        </div>
-    </li>
-    {%- endfor %}
-</ul>
-{% endcomponent %}
-
-{% component list_drafts() %}
-{%- set drafts = load_data(path="data/drafts.json") -%}
-<ul class="bib-list">
-    {%- for ref in drafts.items %}
-    <li>
-        <span class="year">{% if loop.first %}{{ now() | date(format='%Y') }}{% endif %}</span>
-        <div class="data">
-            <div class="title">{{ ref.title }}</div>
-            <div class="details ref">
-                {%- if ref["container-title"] %}<span>{{ ref["container-title"] }}</span>{%- endif %}
-                {%- if ref.status %} ({{ ref.status }}){%- endif %}
-            </div>
-            {{
-            <author_list ref={ref} />}}
-            <div class="link-group">
-                {%- if ref.github %}{{
-                <btn_github href={ref.github} />}}{%- endif %}
-                {%- if ref.pdf %}{{
-                <btn_preprint href={ref.pdf} />}}{%- endif %}
+                {%- endif %}
             </div>
         </div>
     </li>

@@ -5,10 +5,7 @@
 {% block content %}
 <div class="list-header">
     <h2>{{ page.extra.heading }}</h2>
-    {{<btn_download filename={page.extra.bib}/>}}
+    {{<download filename={page.extra.bib}/>}}
 </div>
-{% if page.slug == "papers" %}{{<list_articles/>}}
-{%- elif page.slug == "talks" %}{{<list_talks/>}}
-{%- elif page.slug == "drafts" %}{{<list_drafts/>}}
-{%- endif %}
+{{<bib kind={page.slug}/>}}
 {% endblock %}
