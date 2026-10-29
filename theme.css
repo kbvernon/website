@@ -377,7 +377,7 @@ nav.site-nav {
 [data-tooltip]::after {
     content: attr(data-tooltip);
     position: absolute;
-    top: calc(100% + 0.5em);
+    bottom: calc(100% + 0.5em);
     right: 0;
     background-color: var(--color-ink);
     color: var(--color-paper);
