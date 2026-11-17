@@ -15,10 +15,10 @@ are the specific questions that really animate me these days:
 2. **The economics of early urbanism**: how did we get from small, dispersed 
    groups of mobile hunter-gatherers to large concentrations of sedentary city 
    dwellers?
-3. **Demographic interpolation**: how do we estimate population size without a 
-   census?
-4. **Land-use dynamics and biodiversity**: how does history shape nature's 
+3. **Land-use dynamics and biodiversity**: how does history shape nature's 
    response to urbanization?
+4. **Demographic interpolation**: how do we estimate population size without a 
+   census?
 
 In my spare time, I also contribute to several FOSS projects in the R community,
 especially [extendr](https://extendr.rs/).
